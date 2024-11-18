@@ -13,8 +13,8 @@ export const journeyData = [
     //   ],
     actions: [
       { 
-        name: "Stage 1: Initial Assessment", 
-        content: "Early Signs of Weakness or Delayed Motor Milestones (e.g., hypotonia, difficulty holding up the head, or delayed sitting/walking milestones)" 
+        name: "Early Signs of Weakness or Delayed Motor Milestones", 
+        content: "(e.g., hypotonia, difficulty holding up the head, or delayed sitting/walking milestones)" 
       },
       { 
         name: "Visit to Pediatrician or Primary Care Physician", 
