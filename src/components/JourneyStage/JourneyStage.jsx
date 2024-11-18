@@ -231,7 +231,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
             <div className="grid grid-cols-2 gap-8">
               <Card className="p-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-4">Motor Function Assessment Distribution</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-4">Gender and Age wise Distribution</h4>
                 <div className="h-72">
                   <ResponsiveContainer>
                     <BarChart data={motorFunctionData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>

@@ -12,23 +12,24 @@ export const journeyData = [
     //     "Referral Decision"
     //   ],
     actions: [
-        { 
-          name: "Symptom Onset ", 
-          content: "Family or patient notices memory lapses, confusion, or behavioral changes." 
-        },
-        { 
-          name: "Primary Care Physician", 
-          content: "Discussion of memory and cognitive symptoms, physical exam, and basic screening with PCP." 
-        },
-        { 
-          name: "Cognitive Assessment", 
-          content: "Cognitive testing like MMSE (Mini-Mental State Examination) MMSE (Mini-Mental State Examination) ,MoCA (Montreal Cognitive Assessment) are performed by the PCP" 
-        },
-        { 
-          name: "Referral Decision", 
-          content: "PCP refers to a neurologist for further evaluation if Alzheimer's is suspected." 
-        }
-      ],
+      { 
+        name: "Stage 1: Initial Assessment", 
+        content: "Early Signs of Weakness or Delayed Motor Milestones (e.g., hypotonia, difficulty holding up the head, or delayed sitting/walking milestones)" 
+      },
+      { 
+        name: "Visit to Pediatrician or Primary Care Physician", 
+        content: "Initial discussion of observed symptoms and potential concerns." 
+      },
+      { 
+        name: "Neurological or Genetic Screening Suggestions", 
+        content: "Evaluation for neuromuscular issues using reflex tests or CK levels." 
+      },
+      { 
+        name: "Referral to a Neurologist", 
+        content: "Decision to involve a pediatric neurologist, geneticist, or SMA care expert based on clinical findings." 
+      }
+    ]
+    ,
       metrics:[
         { value: "88%", label: "Paediatric SMA patients seeing a physician or specialist in 2023" },
         { value: "5.8 specialists", label: "Average number of specialists seen by paediatric SMA patients in 2023" },
@@ -156,60 +157,55 @@ export const journeyData = [
       },
       findings: [
         {
-          description: "Strengthen Awareness Programs",
+          description: "SMA Types 3 and 4 Prevalence",
           subpoints: [
-            "Launch SMA awareness campaigns and collaborate with schools and community centers to educate the public and help caregivers identify symptoms early."
+            "SMA Types 3 and 4 prevalence remained relatively stable over the past several years, indicating a consistent patient population. This suggests ongoing management needs for this demographic."
           ]
         },
         {
-          description: "Enhance Pediatric Screening",
+          description: "Pediatric vs. Adult Care Access",
           subpoints: [
-            "Implement nationwide newborn screening for SMA and provide pediatricians with training for early detection and referral."
+            "Pediatric SMA patients access a wider range of specialized care than adults, highlighting an unequal distribution of healthcare resources. This disparity may affect overall patient outcomes."
           ]
         },
         {
-          description: "Improve Primary Care Capabilities",
+          description: "Delays in Diagnosis",
           subpoints: [
-            "Equip primary care centers with diagnostic tools for SMA and implement telemedicine initiatives for remote consultations with specialists."
+            "Significant delays in diagnosis stem from multiple barriers including delayed symptom recognition, access limitations, and systemic weaknesses in initial assessment. These delays negatively impact timely intervention and treatment."
           ]
         },
         {
-          description: "Subsidize Screening Costs",
+          description: "Geographic and Infrastructure Barriers",
           subpoints: [
-            "Offer free or low-cost screening to underserved populations to remove financial barriers."
-          ]
-        },
-        {
-          description: "Leverage Technology for Early Diagnosis",
-          subpoints: [
-            "Develop AI tools for early detection of SMA symptoms and promote mobile apps to track developmental milestones."
+            "Geographic limitations, transportation difficulties, and limited primary care access, compounded by inadequate primary care infrastructure, significantly hinder timely SMA evaluation."
           ]
         }
-      ]
+      ]      
       
     },
     {
       number: 2,
-      title: "Diagnosis and Assessment",
+      title: "Diagnosis Confirmation",
       description: "Detailed diagnostic process including the use of biomarkers and differential diagnosis methods.",
       actions: [
         { 
-          name: "Specialist Consultation", 
-          content: "Neurologist or geriatric specialist reviews cognitive symptoms and medical history." 
+          name: "Consultation with a Neurologist or Neuromuscular Specialist", 
+          content: "Detailed evaluation of motor symptoms and clinical history." 
         },
         { 
-          name: "Comprehensive Testing", 
-          content: "Neurologist also performs cognitive tests like MMSE, MoCA and neuropsychological evaluations." 
+          name: "Genetic Testing for SMA", 
+          content: "Confirmation of SMN1 gene deletion/mutation through blood tests." 
         },
         { 
-          name: "Biomarker Analysis", 
-          content: "Brain imaging (MRI, CT, or PET) and CSF(Cerebrospinal Fluid) or blood tests to detect Alzheimer's-related proteins (beta-amyloid, tau)." 
+          name: "SMN2 Copy Number Analysis", 
+          content: "Assessment to determine disease severity and guide treatment planning." 
         },
         { 
-          name: "Diagnosis & Staging", 
-          content: "Confirmation of Alzheimer’s type, with staging to assess disease severity." 
+          name: "Diagnosis Confirmation and Staging", 
+          content: "Classification as SMA Type 1, 2, 3, or 4 based on onset age, symptoms, and genetic findings." 
         }
-      ],
+      ]
+      ,
       metrics: [
         { value: "95% or higher", label: "Genetic Testing Rate" },
         { value: ">98%", label: "SMN1 Gene Mutation Confirmation Rate" },
@@ -340,37 +336,31 @@ export const journeyData = [
       },
 
       findings: [
-      {
-        description: "Strengthen Awareness Programs",
-        subpoints: [
-          "Launch SMA awareness campaigns and collaborate with schools/community centers to educate the public and help caregivers identify symptoms early."
-        ]
-      },
-      {
-        description: "Enhance Pediatric Screening",
-        subpoints: [
-          "Implement state-funded newborn screening for SMA and train pediatricians for early identification and referral."
-        ]
-      },
-      {
-        description: "Improve Primary Care Capabilities",
-        subpoints: [
-          "Equip primary care centers with basic diagnostic tools and launch telemedicine to connect primary physicians with SMA specialists."
-        ]
-      },
-      {
-        description: "Subsidize Screening Costs",
-        subpoints: [
-          "Provide free or low-cost initial screenings to reduce financial barriers for underserved populations."
-        ]
-      },
-      {
-        description: "Leverage Technology for Early Diagnosis",
-        subpoints: [
-          "Develop AI tools for early SMA symptom detection and promote mobile apps to track motor milestones."
-        ]
-      }
-    ]
+        {
+          description: "Urban-Rural Disparity",
+          subpoints: [
+            "Only 35% of rural areas have immediate access to advanced testing (e.g., SMN2 copy determination), causing delays for patients outside urban centers."
+          ]
+        },
+        {
+          description: "Cost Barriers",
+          subpoints: [
+            "Genetic testing costs remain prohibitive for ~40% of families, emphasizing the need for financial assistance or insurance reforms."
+          ]
+        },
+        {
+          description: "Delays in Testing Reports",
+          subpoints: [
+            "30% of labs report delays in generating results, prolonging the diagnostic journey."
+          ]
+        },
+        {
+          description: "Late Diagnoses for Milder Types",
+          subpoints: [
+            "The average age of diagnosis for cases not identified via newborn screening remains high, particularly for SMA Types 3 and 4, at 8.1 years in 2023."
+          ]
+        }
+      ]      
 
       
     },
@@ -380,22 +370,27 @@ export const journeyData = [
       description: "Long-term treatment, monitoring, and management of Alzheimer's disease and other dementias.",
       actions: [
         { 
-          name: "Treatment Planning", 
-          content: "Develop a care plan that includes FDA-approved medications like cholinesterase inhibitors (e.g., leqembi,donepezil, rivastigmine, galantamine) for mild to moderate stages, and memantine for moderate to severe stages. Incorporate lifestyle recommendations, such as regular physical activity and brain-healthy nutrition." 
+          name: "Development of an Individualized Treatment Plan", 
+          content: "Consideration of patient age, SMA type, motor abilities, and SMN2 copy number for therapy selection." 
         },
         { 
-          name: "Implementation", 
-          content: "Start prescribed medications, establish consistent routines, and introduce targeted cognitive activities (e.g., memory exercises, social interactions) tailored to the patient's cognitive level." 
+          name: "Initiation of Disease-Modifying Therapy (DMT)", 
+          content: "Administration of FDA-approved treatments such as Spinraza, Zolgensma, or Evrysdi." 
         },
         { 
-          name: "Monitoring Protocol", 
-          content: "Conduct regular assessments (e.g., MMSE or MoCA) every 6-12 months, monitor for medication side effects, and adjust treatment if symptoms progress or new side effects emerge." 
+          name: "Supportive Therapies and Interventions", 
+          content: "Physical therapy, respiratory support, and nutritional counseling to complement DMT." 
         },
         { 
-          name: "Care Coordination", 
-          content: "Facilitate coordination among neurologists, primary care, family caregivers, and Alzheimer's support services to manage ongoing needs, home safety, and caregiver education and support." 
+          name: "Regular Monitoring and Outcome Tracking", 
+          content: "Ongoing assessments using motor function scales like HFMSE and respiratory evaluations." 
+        },
+        { 
+          name: "Comprehensive Care Coordination", 
+          content: "Multidisciplinary management involving neurologists, pulmonologists, dietitians, and therapists." 
         }
-      ],
+      ]
+      ,
       metrics: [
         { value: "98%", label: "Treatment Utilization Rate (Overall)" },
         { value: "1–2 weeks", label: "Treatment Initiation Time (Average)" },
@@ -518,36 +513,31 @@ export const journeyData = [
       },
       findings: [
         {
-          description: "Optimize Therapy Approvals",
+          description: "Adults’ Lower Treatment Rates",
           subpoints: [
-            "Streamline regulatory processes and create funding mechanisms to fast-track and cover high-cost SMA therapies like Zolgensma and Spinraza."
+            "Adults have the highest percentage of untreated individuals, potentially due to diagnostic delays or patient choice."
           ]
         },
         {
-          description: "Increase SMA Treatment Centers",
+          description: "Efficacy and Safety",
           subpoints: [
-            "Expand SMA-specialized centers in underserved regions and train more neuromuscular specialists to manage therapies."
+            "While efficacy remains the top consideration, teens prioritize safety equally with efficacy (36%), unlike adults (26%)."
           ]
         },
         {
-          description: "Leverage Digital Health Tools",
+          description: "Insurance Denials",
           subpoints: [
-            "Use digital health apps for monitoring patient progress, therapy adherence, and telehealth for follow-ups to reduce in-person visits."
+            "50% of adults faced denials for durable medical equipment, highlighting significant barriers in accessing necessary resources."
           ]
         },
         {
-          description: "Expand Financial Aid Programs",
+          description: "Multiple Treatments",
           subpoints: [
-            "Advocate for government subsidies, NGO collaborations, and insurer coverage to reduce therapy costs for families."
-          ]
-        },
-        {
-          description: "Educate Families About Treatments",
-          subpoints: [
-            "Create multilingual resources and host workshops to educate families about SMA treatments, benefits, and side effects."
+            "28% of individuals received two or more treatments, with children more likely to undergo multiple therapies compared to teens and adults."
           ]
         }
       ]
+      
       
     }
   ];
