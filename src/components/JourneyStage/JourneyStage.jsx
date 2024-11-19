@@ -10,7 +10,7 @@ import {
   ArrowRight, Stethoscope, Building2, User, LineChart as LineChartIcon,
   ClipboardCheck, AlertTriangle, ChevronDown, ChevronUp
 } from 'lucide-react';
-import DonutChart from '../donut/donutchart';
+import DonutChartWithSubcharts from '../donut/donutchart';
 
 const JourneyStage = ({ stage, metrics, barriers, findings }) => {
   const [hoveredAction, setHoveredAction] = useState(null);
@@ -212,7 +212,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
             <div className="grid grid-cols-2 gap-8">
             <Card className="p-6">
-            <DonutChart />
+            <DonutChartWithSubcharts />
             </Card>
 
 
@@ -335,7 +335,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                 <Card className="p-6">
                   <h4 className="text-sm font-medium text-gray-700 mb-6">Factor Comparison</h4>
                   <div className="aspect-[4/3] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
+                    <ResponsiveContainer width="90%" height="90%">
                       <BarChart data={treatmentData}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="name" />

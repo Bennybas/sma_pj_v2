@@ -16,16 +16,16 @@ const SankeyDiagram = () => {
     svg.attr("width", width)
        .attr("height", height);
 
-    // Updated color palette
+    // Enhanced color palette with more distinct colors
     const colorScale = d3.scaleOrdinal()
       .domain([
         "Patients", "Male", "Female", "Boy", "Teen", "Male", 
         "Girl", "Female", "Adult", "PCP", "Pediatrician", "Neurologist"
       ])
       .range([
-        "#E3F2FD", "#BBDEFB", "#F8BBD0", "#C8E6C9", "#B3E5FC", 
-        "#FFCDD2", "#FFEBEE", "#80DEEA", "#B2DFDB", "#A5D6A7", 
-        "#81D4FA", "#C8E6C9"
+        "#1565C0", "#2196F3", "#F50057", "#4CAF50", "#03A9F4", 
+        "#E91E63", "#FF5722", "#009688", "#FF9800", "#795548", 
+        "#9C27B0", "#607D8B"
       ]);
 
     const data = {
@@ -81,7 +81,7 @@ const SankeyDiagram = () => {
 
     const chart = svg.append("g");
 
-    // Links with subtle curvature
+    // Enhanced links with gradient and smoother hover effect
     const link = chart.append("g")
       .selectAll(".link")
       .data(links)
@@ -89,41 +89,87 @@ const SankeyDiagram = () => {
       .attr("class", "link")
       .attr("d", sankeyLinkHorizontal())
       .attr("fill", "none")
-      .attr("stroke", d => colorScale(d.source.name))
-      .attr("stroke-opacity", 0.6)
+      .attr("stroke", d => {
+        const gradient = svg.append("linearGradient")
+          .attr("id", `link-gradient-${d.source.index}-${d.target.index}`)
+          .attr("gradientUnits", "userSpaceOnUse")
+          .attr("x1", d.source.x1)
+          .attr("y1", (d.source.y0 + d.source.y1) / 2)
+          .attr("x2", d.target.x0)
+          .attr("y2", (d.target.y0 + d.target.y1) / 2);
+        
+        gradient.append("stop").attr("offset", "0%").attr("stop-color", colorScale(d.source.name));
+        gradient.append("stop").attr("offset", "100%").attr("stop-color", colorScale(d.target.name));
+        
+        return `url(#link-gradient-${d.source.index}-${d.target.index})`;
+      })
+      .attr("stroke-opacity", 0.5)
       .attr("stroke-width", d => Math.max(1, d.width))
       .style("cursor", "pointer")
       .on("mouseover", function(event, d) {
         d3.select(this)
+          .transition()
+          .duration(200)
           .attr("stroke-opacity", 0.8)
-          .attr("stroke-width", d.width * 1.2);
+          .attr("stroke-width", d.width * 1.5);
         
         const tooltip = chart.append("g")
           .attr("class", "link-tooltip");
         
         tooltip.append("rect")
-          .attr("x", (d.source.x1 + d.target.x0) / 2 - 80)
-          .attr("y", (d.source.y0 + d.target.y0) / 2 - 25)
-          .attr("width", 160)
-          .attr("height", 25)
-          .attr("fill", "white")
-          .attr("stroke", "#ccc")
-          .attr("rx", 4);
+          .attr("x", (d.source.x1 + d.target.x0) / 2 - 100)
+          .attr("y", (d.source.y0 + d.target.y0) / 2 - 30)
+          .attr("width", 200)
+          .attr("height", 30)
+          .attr("fill", "rgba(255,255,255,0.9)")
+          .attr("stroke", "#bbb")
+          .attr("rx", 6)
+          .attr("filter", "url(#drop-shadow)");
 
         tooltip.append("text")
           .attr("x", (d.source.x1 + d.target.x0) / 2)
-          .attr("y", (d.source.y0 + d.target.y0) / 2 - 8)
+          .attr("y", (d.source.y0 + d.target.y0) / 2 - 10)
           .attr("text-anchor", "middle")
           .attr("fill", "#333")
-          .text(`${d.source.name} → ${d.target.name}: ${d.value}`)
-          .style("font-size", "12px");
+          .text(`${d.source.name} → ${d.target.name}: ${d.value} (${((d.value / 100) * 100).toFixed(1)}%)`)
+          .style("font-size", "13px")
+          .style("color", "#00000")
+          .style("font-weight", "500");
       })
       .on("mouseout", function(event, d) {
         d3.select(this)
-          .attr("stroke-opacity", 0.6)
+          .transition()
+          .duration(200)
+          .attr("stroke-opacity", 0.5)
           .attr("stroke-width", Math.max(1, d.width));
         chart.selectAll(".link-tooltip").remove();
       });
+
+    // Add drop shadow filter
+    const defs = svg.append("defs");
+    const filter = defs.append("filter")
+      .attr("id", "drop-shadow")
+      .attr("height", "130%");
+
+    filter.append("feGaussianBlur")
+      .attr("in", "SourceAlpha")
+      .attr("stdDeviation", 3)
+      .attr("result", "shadow");
+    
+    filter.append("feOffset")
+      .attr("dx", 2)
+      .attr("dy", 2);
+    
+    filter.append("feComponentTransfer")
+      .append("feFuncA")
+      .attr("type", "linear")
+      .attr("slope", 0.3);
+
+    filter.append("feMerge")
+      .html(`
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      `);
 
     const node = chart.append("g")
       .selectAll(".node")
@@ -136,48 +182,59 @@ const SankeyDiagram = () => {
       .attr("height", d => d.y1 - d.y0)
       .attr("width", d => d.x1 - d.x0)
       .attr("fill", d => colorScale(d.name))
-      .attr("rx", 4)
+      .attr("rx", 6)
       .attr("stroke", "#fff")
-      .attr("stroke-width", 1)
+      .attr("stroke-width", 2)
       .attr("opacity", 0.9)
       .style("cursor", "pointer")
       .on("mouseover", function(event, d) {
-        d3.select(this).attr("opacity", 1);
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .attr("opacity", 1)
+          .attr("stroke-width", 3);
         
         const tooltip = chart.append("g")
           .attr("class", "node-tooltip");
         
         tooltip.append("rect")
-          .attr("x", d.x0 + (d.x1 - d.x0) / 2 - 60)
-          .attr("y", d.y0 - 30)
-          .attr("width", 120)
-          .attr("height", 25)
-          .attr("fill", "white")
-          .attr("stroke", "#ccc")
-          .attr("rx", 4);
+          .attr("x", d.x0 + (d.x1 - d.x0) / 2 - 80)
+          .attr("y", d.y0 - 35)
+          .attr("width", 160)
+          .attr("height", 30)
+          .attr("fill", "rgba(255,255,255,0.9)")
+          .attr("stroke", "#bbb")
+          .attr("rx", 6)
+          .attr("filter", "url(#drop-shadow)");
 
         tooltip.append("text")
           .attr("x", d.x0 + (d.x1 - d.x0) / 2)
-          .attr("y", d.y0 - 15)
+          .attr("y", d.y0 - 18)
           .attr("text-anchor", "middle")
           .attr("fill", "#333")
           .text(`${d.name}: ${d.value}`)
-          .style("font-size", "12px");
+          .style("font-size", "13px")
+          .style("font-weight", "500");
       })
       .on("mouseout", function(event, d) {
-        d3.select(this).attr("opacity", 0.9);
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .attr("opacity", 0.9)
+          .attr("stroke-width", 2);
         chart.selectAll(".node-tooltip").remove();
       });
 
-    node.append("text")
+      node.append("text")
       .attr("x", d => (d.x1 - d.x0) / 2)
       .attr("y", d => (d.y1 - d.y0) / 2)
       .attr("dy", "0.35em")
       .attr("text-anchor", "middle")
-      .text(d => d.name)
-      .attr("fill", "#333")
-      .attr("font-weight", "500")
-      .style("font-size", "14px")
+      .text(d => `${d.name}\n${((d.value / 100) * 100).toFixed(1)}%`)
+      .attr("fill", "#ffffff")
+      .attr("font-weight", "600")
+      .style("font-size", "12px")
+      .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.3)")
       .style("pointer-events", "none");
 
   }, []);

@@ -37,36 +37,35 @@ export const journeyData = [
         { value: "1 in 15,000", label: "Incidence rate of SMA " }
       ]
       ,
-      barriers:{
+      barriers: {
         physician: [
           {
             subpoints: [
               "52% of patients or caregivers report delays in recognizing initial symptoms, impacting timely diagnosis.",
               "15% of healthcare facilities are inadequately equipped to handle physically disabled patients.",
-              "35% of cases report geographic limitations, while 40% face transportation-related issues for timely evaluations.",
-            ],
-          },
+              "35% of cases report geographic limitations, while 40% face transportation-related issues for timely evaluations."
+            ]
+          }
         ],
-      
+        
         system: [
           {
             subpoints: [
               "25% of clinics lack genetic testing facilities, and 50% of providers express uncertainty about standardized SMA screening protocols.",
-              "40% of clinics report staff shortages, leading to delays in evaluations, while 45% of physicians rely on outdated assessment tools.",
-              "Only 30% of primary care physicians have immediate access to specialists for neuromuscular disorders.",
-            ]  
-          },
+              "40% of clinics report staff shortages, leading to delays in evaluations, while 45% of physicians rely on outdated assessment tools."
+            ]
+          }
         ],
-      
+        
         patient: [
           {
             subpoints: [
               "Over 40% of patients or caregivers delay seeking medical advice due to misinterpretation of symptoms.",
-              "50% of patients report financial challenges, while 30% face logistical hurdles accessing primary care.",
-              "60% of patients or caregivers are unaware of SMA-specific symptoms, and 35% struggle with understanding medical diagnoses."
+              "50% of patients report financial challenges, while 30% face logistical hurdles accessing primary care."
             ]
-          }]
-      }
+          }
+        ]
+      }      
       ,
       findings : [
         {
@@ -125,41 +124,38 @@ export const journeyData = [
         { value: "8.1 years", label: "Average Age Not Identified by Screening" }
       ],
       
-      barriers : {
+      barriers: {
         physician: [
           {
             subpoints: [
               "45% of healthcare centers lack genetic testing facilities.",
               "Only 35% of rural areas have access to advanced SMN1/SMN2 copy diagnostics.",
-              "25% of tertiary care centers lack sufficient resources for rare disorder diagnostics.",
-              "High costs (~40% of families struggle to afford genetic tests).",
               "33% of patients experience delays exceeding four weeks for specialized appointments."
             ]
           }
         ],
+        
         system: [
           {
             subpoints: [
               "35% of referrals are delayed due to bureaucratic inefficiencies.",
               "40% of diagnostic centers face challenges in accessing prior medical records.",
-              "Only 30% of regions have adequate neuromuscular specialists.",
               "Overreliance on overloaded tertiary centers delays diagnostics for 25% of cases.",
               "50% of insurance plans exclude or limit coverage for genetic testing."
             ]
           }
         ],
+        
         patient: [
           {
             subpoints: [
               "60% of families struggle to afford diagnostics.",
               "45% of patients/caregivers lack understanding of genetic testing's importance.",
-              "30% of families fear stigma from genetic diagnoses.",
-              "25% of patients express anxiety about invasive or unfamiliar tests.",
               "50% of patients believe initial symptoms do not warrant advanced testing."
             ]
           }
         ]
-      }
+      }      
       
       ,
 
@@ -219,40 +215,39 @@ export const journeyData = [
         { value: "75%", label: "Successful Appeal Rate After Denial" },
         { value: "79%", label: "Proportion of Individuals Receiving Telemedicine" }
       ],
-      barriers : {
+      barriers: {
         physician: [
           {
             subpoints: [
               "40% of rural populations lack access to SMA-specialized treatment centers.",
               "35% of rehabilitation facilities report staffing shortages, impacting therapy delivery.",
               "30% of families experience therapy approval delays exceeding three months.",
-              "20% of patients report delays in procuring SMA medications due to supply chain issues.",
               "50% of families struggle with the high costs of initiating SMA-approved therapies."
             ]
           }
         ],
+        
         system: [
           {
             subpoints: [
               "50% of applications for gene therapies like Zolgensma are denied initially.",
               "15% of new SMA therapies face delays in regional licensing processes.",
-              "35% of SMA-specialized centers face staffing shortages, delaying patient care.",
-              "Only 20% of eligible patients are enrolled in ongoing clinical trials."
+              "35% of SMA-specialized centers face staffing shortages, delaying patient care."
             ]
           }
         ],
+        
         patient: [
           {
             subpoints: [
               "25% of patients struggle to maintain consistent therapy schedules.",
               "30% of families face mobility or transportation issues affecting regular treatment.",
               "40% of patients or caregivers lack awareness about approved SMA therapies.",
-              "20% of families hesitate to adopt novel treatments due to trust concerns.",
-              "30% of caregivers express concerns about potential adverse effects of SMA therapies."
+              "20% of families hesitate to adopt novel treatments due to trust concerns."
             ]
           }
         ]
-      }
+      }      
       
       ,
        findings : [
