@@ -452,6 +452,18 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
         return null;
     }
   };
+  const [hoveredSection, setHoveredSection] = useState(null);
+  const getTranslateClass = (section) => {
+    if (hoveredSection === 'metrics' && section !== 'metrics') return 'translate-x-8';
+    if (hoveredSection === 'barriers') {
+      if (section === 'metrics') return '-translate-x-8';
+      if (section === 'opportunities') return 'translate-x-9';
+    }
+    if (hoveredSection === 'opportunities') {
+      if (section === 'metrics' || section === 'barriers') return '-translate-x-8';
+    }
+    return '';
+  };
 
   return (
     <div className="relative w-full">
@@ -530,7 +542,12 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
       {/* Key Metrics, Barriers, and Findings Grid */}
       <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-3">
+        {/* Key Metrics Section */}
+        <div 
+          className={`col-span-3 transition-transform duration-300 ease-in-out ${getTranslateClass('metrics')}`}
+          onMouseEnter={() => setHoveredSection('metrics')}
+          onMouseLeave={() => setHoveredSection(null)}
+        >
           <Card className="h-full p-5 bg-gradient-to-b from-blue-50 to-blue-100 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
             <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
               <LineChartIcon className="w-4 h-4" />
@@ -538,7 +555,10 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             </h3>
             <div className="space-y-3">
               {metrics.map((metric, idx) => (
-                <div key={idx} className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                <div 
+                  key={idx} 
+                  className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                >
                   <div className="text-xl font-bold text-blue-600">{metric.value}</div>
                   <div className="text-xs leading-relaxed">{metric.label}</div>
                 </div>
@@ -547,7 +567,12 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           </Card>
         </div>
 
-        <div className="col-span-6">
+        {/* Key Barriers Section */}
+        <div 
+          className={`col-span-6 transition-transform duration-300 ease-in-out ${getTranslateClass('barriers')}`}
+          onMouseEnter={() => setHoveredSection('barriers')}
+          onMouseLeave={() => setHoveredSection(null)}
+        >
           <Card className="h-full p-5 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
             <h3 className="font-semibold mb-3 text-gray-800 flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-500" />
@@ -557,7 +582,12 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           </Card>
         </div>
 
-        <div className="col-span-3">
+        {/* Key Opportunities Section */}
+        <div 
+          className={`col-span-3 transition-transform duration-300 ease-in-out ${getTranslateClass('opportunities')}`}
+          onMouseEnter={() => setHoveredSection('opportunities')}
+          onMouseLeave={() => setHoveredSection(null)}
+        >
           <Card className="h-full p-5 bg-gradient-to-b from-purple-50 to-purple-100 shadow-lg rounded-lg hover:shadow-xl transition-shadow">
             <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
               <ClipboardCheck className="w-4 h-4" />
@@ -581,10 +611,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             </div>
           </Card>
         </div>
-
       </div>
       
-
       <div className="absolute left-8 bottom-0 w-0.5 h-8 bg-purple-200" />
     </div>
   );
