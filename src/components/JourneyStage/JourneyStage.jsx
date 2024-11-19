@@ -36,16 +36,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     switch (stage.number) {
       case 1: {
         // Transform diagnosis time data for visualization
-        const smaTrendsData = [
-          { year: '2016', 'Type 3': 30, 'Type 4': 3 },
-          { year: '2017', 'Type 3': 30, 'Type 4': 3 },
-          { year: '2018', 'Type 3': 29, 'Type 4': 3 },
-          { year: '2019', 'Type 3': 29, 'Type 4': 3 },
-          { year: '2020', 'Type 3': 28, 'Type 4': 3 },
-          { year: '2021', 'Type 3': 28, 'Type 4': 3 },
-          { year: '2022', 'Type 3': 27, 'Type 4': 3 },
-          { year: '2023', 'Type 3': 27, 'Type 4': 4 }
-        ];
+        
   
         const smaDistributionData = [
           {
@@ -83,7 +74,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
   
         return {
           type: 'line',
-          lineData: smaTrendsData,
+         
           smaDistributionData: smaDistributionData,
           
         };
@@ -97,24 +88,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { name: 'Teens', Type3: 24, Type4: 2 },
           { name: 'Adults', Type3: 38, Type4: 5 },
         ];
-        const lineData1 = [
-          { year: '2017', averageAge: 5.63, medianAge: 1.36 },
-          { year: '2018', averageAge: 5.48, medianAge: 0.82 },
-          { year: '2019', averageAge: 4.93, medianAge: 0.55 },
-          { year: '2020', averageAge: 5.75, medianAge: 0.25 },
-          { year: '2021', averageAge: 4.38, medianAge: 0.19 },
-          { year: '2022', averageAge: 3.84, medianAge: 0.03 },
-          { year: '2023', averageAge: 4.11, medianAge: 0.03 }
+        const SMN2  = [
+          { name: "1 Copy", Percentage: 3, Severity: "Severe (Type 1, Type 2)" },
+          { name: "2 Copies", Percentage: 36, Severity: "Severe (Type 1, Type 2)" },
+          { name: "3 Copies", Percentage: 48, Severity: "Mild (Type 3, Type 4)" },
+          { name: "4+ Copies", Percentage: 14, Severity: "Mild (Type 3, Type 4)" },
         ];
         const Screeningdata = [
           { name: 'Via Screening', value: 32 },
           { name: 'Not Via Screening', value: 68 },
         ];
+        const smaTrendsData = [
+          { year: '2016', 'Type 3': 30, 'Type 4': 3 },
+          { year: '2017', 'Type 3': 30, 'Type 4': 3 },
+          { year: '2018', 'Type 3': 29, 'Type 4': 3 },
+          { year: '2019', 'Type 3': 29, 'Type 4': 3 },
+          { year: '2020', 'Type 3': 28, 'Type 4': 3 },
+          { year: '2021', 'Type 3': 28, 'Type 4': 3 },
+          { year: '2022', 'Type 3': 27, 'Type 4': 3 },
+          { year: '2023', 'Type 3': 27, 'Type 4': 4 }
+        ];
         return {
           type: 'bar',
           motorFunctionData: motorFunctionData,
           Screeningdata:Screeningdata,
-          lineData1:lineData1
+          SMN2:SMN2,
+          lineData: smaTrendsData,
           
         };
     
@@ -166,7 +165,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     const chartConfig = getChartData();
     if (!chartConfig) return null;
 
-    const { type, motorFunctionData, title, lineData, lineData1,treatmentData, treatmentData1, insuranceData,smaDistributionData,Breathingdata,Screeningdata } = chartConfig;
+    const { type, title, lineData, SMN2,treatmentData, treatmentData1, insuranceData,smaDistributionData,Breathingdata,Screeningdata } = chartConfig;
 
     switch (type) {
       case 'line':
@@ -174,56 +173,12 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
         <div className="w-full space-y-6">
           <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
           <SankeyDiagram />
-          <div className="grid grid-cols-2 gap-8">
+          
             {/* Line Chart - Historical Trends */}
-            <Card className="p-4">
-              <h4 className="text-sm font-medium text-gray-700 mb-4">Historical SMA Type Distribution</h4>
-              <div className="h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                    <LineChart 
-                      data={lineData} 
-                      margin={{ top: 30, right: 30, left: 20, bottom: 5 }}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="year" />
-                      <YAxis 
-                        domain={[0, 35]} 
-                        tickFormatter={(value) => `${value}%`}
-                      />
-                      <Tooltip formatter={(value) => `${value}%`} />
-                      <Legend />
-                      <Line
-                        type="monotone"
-                        dataKey="Type 3"
-                        stroke="#ffc658"
-                        strokeWidth={2}
-                        dot={{ r: 4 }}
-                        label={{
-                          position: 'top',
-                          fill: '#ffc658',
-                          fontSize: 12,
-                          formatter: (value) => `${value}%`
-                        }}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="Type 4"
-                        stroke="#ff7300"
-                        strokeWidth={2}
-                        dot={{ r: 4 }}
-                        label={{
-                          position: 'top',
-                          fill: '#ff7300',
-                          fontSize: 12,
-                          formatter: (value) => `${value}%`
-                        }}
-                      />
-                    </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </Card>
+
 
             {/* Specialists Chart */}
-            <Card className="p-4">
+            {/* <Card className="p-4">
               <h4 className="text-sm font-medium text-gray-700 mb-4">
                 Distribution of Specialists by Category (%)
               </h4>
@@ -244,10 +199,10 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-            </Card>
+            </Card> */}
 
 
-          </div>
+          
         </div>
       );
 
@@ -259,22 +214,31 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             <Card className="p-6">
             <DonutChart />
             </Card>
+
+
             <Card className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Age(years) SMA Diagnosis</h4>
-                  <div className="aspect-[4/3] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={lineData1}>
+              <h4 className="text-sm font-medium text-gray-700 mb-6">SMN2 Copy Number Comparison</h4>
+              <div className="aspect-[4/3] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={SMN2.map((entry, index) => ({
+                      ...entry,
+                      fill: ["#8884d8", "#82ca9d", "#ffc658", "#d0ed57"][index % 4],
+                    }))}
+                  >
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="year" />
-                    <YAxis />
+                    <XAxis dataKey="name" />
+                    <YAxis label={{ value: "Percentage (%)", angle: -90, position: "insideLeft" }} />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="averageAge" stroke="#8884d8" name="Average Age" />
-                    <Line type="monotone" dataKey="medianAge" stroke="#82ca9d" name="Median Age" />
-                  </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </Card>
+                    <Bar dataKey="Percentage" name="Percentage" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+
+
+
             </div>
            
             <div className="grid grid-cols-2 gap-8">
@@ -307,6 +271,52 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
+              </Card>
+
+              <Card className="p-4">
+                  <h4 className="text-sm font-medium text-gray-700 mb-4">Historical SMA Type Distribution</h4>
+                  <div className="h-[400px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                        <LineChart 
+                          data={lineData} 
+                          margin={{ top: 30, right: 30, left: 20, bottom: 5 }}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="year" />
+                          <YAxis 
+                            domain={[0, 35]} 
+                            tickFormatter={(value) => `${value}%`}
+                          />
+                          <Tooltip formatter={(value) => `${value}%`} />
+                          <Legend />
+                          <Line
+                            type="monotone"
+                            dataKey="Type 3"
+                            stroke="#ffc658"
+                            strokeWidth={2}
+                            dot={{ r: 4 }}
+                            label={{
+                              position: 'top',
+                              fill: '#ffc658',
+                              fontSize: 12,
+                              formatter: (value) => `${value}%`
+                            }}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="Type 4"
+                            stroke="#ff7300"
+                            strokeWidth={2}
+                            dot={{ r: 4 }}
+                            label={{
+                              position: 'top',
+                              fill: '#ff7300',
+                              fontSize: 12,
+                              formatter: (value) => `${value}%`
+                            }}
+                          />
+                        </LineChart>
+                    </ResponsiveContainer>
+                  </div>
               </Card>
               
               
@@ -429,6 +439,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   </ResponsiveContainer>
                 </div>
               </Card>
+
+              
               </div>
 
 
@@ -549,7 +561,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           <Card className="h-full p-5 bg-gradient-to-b from-purple-50 to-purple-100 shadow-lg rounded-lg hover:shadow-xl transition-shadow">
             <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
               <ClipboardCheck className="w-4 h-4" />
-              Key Findings
+              Key Opportunities
             </h3>
             <div className="space-y-3">
               {findings.map((finding, idx) => (
@@ -559,7 +571,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                     {finding.subpoints && finding.subpoints.length > 0 && (
                       <ul className="list-disc pl-5 space-y-1">
                         {finding.subpoints.map((subpoint, subIdx) => (
-                          <li key={subIdx} className="text-xs leading-relaxed">{subpoint}</li>
+                          <li key={subIdx} className="text-xs font-bold leading-relaxed">{subpoint}</li>
                         ))}
                       </ul>
                     )}
@@ -569,91 +581,87 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             </div>
           </Card>
         </div>
+
       </div>
+      
 
       <div className="absolute left-8 bottom-0 w-0.5 h-8 bg-purple-200" />
     </div>
   );
 };
 const KeyBarriers = ({ barriers }) => {
-  // Use an array to track expanded barriers
-  const [expandedBarriers, setExpandedBarriers] = useState([]);
-
-  const toggleBarrier = (key) => {
-    setExpandedBarriers((prevExpanded) =>
-      prevExpanded.includes(key)
-        ? prevExpanded.filter((barrier) => barrier !== key) // Collapse if already expanded
-        : [...prevExpanded, key] // Expand if not already expanded
-    );
-  };
-
-  // Define colors for each barrier type
   const barrierColors = {
-    physician: 'bg-red-100',
-    system: 'bg-blue-100',
-    patient: 'bg-green-100',
+    physician: {
+      background: 'bg-red-50',
+      headerBg: 'bg-red-100',
+      icon: 'text-red-600',
+      borderColor: 'border-red-200'
+    },
+    system: {
+      background: 'bg-blue-50',
+      headerBg: 'bg-blue-100',
+      icon: 'text-blue-600',
+      borderColor: 'border-blue-200'
+    },
+    patient: {
+      background: 'bg-green-50',
+      headerBg: 'bg-green-100',
+      icon: 'text-green-600',
+      borderColor: 'border-green-200'
+    }
   };
 
   return (
-    <div className="space-y-4">
-      {Object.entries(barriers).map(([key, barrierGroup], groupIdx) => (
-        <div key={groupIdx} className="bg-gray-50 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-          <button
-            className={`w-full flex items-center justify-between px-4 py-3 hover:bg-gray-100 transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 ${barrierColors[key]}`}
-            onClick={() => toggleBarrier(key)}
+    <div className="space-y-6">
+      {Object.entries(barriers).map(([key, barrierGroup], groupIdx) => {
+        const colors = barrierColors[key];
+
+        return (
+          <div 
+            key={groupIdx} 
+            className={`rounded-xl shadow-md overflow-hidden ${colors.background}`}
           >
-            <div className="flex items-center gap-2">
-              {key === 'physician' && <Stethoscope className="w-4 h-4 text-red-600" />}
-              {key === 'system' && <Building2 className="w-4 h-4 text-blue-600" />}
-              {key === 'patient' && <User className="w-4 h-4 text-green-600" />}
-              <h4 className="text-sm font-semibold capitalize">{key}</h4>
+            <div 
+              className={`w-full flex items-center gap-3 px-5 py-4 ${colors.headerBg}`}
+            >
+              {key === 'physician' && <Stethoscope className={`w-5 h-5 ${colors.icon}`} />}
+              {key === 'system' && <Building2 className={`w-5 h-5 ${colors.icon}`} />}
+              {key === 'patient' && <User className={`w-5 h-5 ${colors.icon}`} />}
+              <h3 className="text-base font-semibold capitalize text-gray-800">{key} Barriers</h3>
             </div>
-            <div className="transform transition-transform duration-200">
-              {expandedBarriers.includes(key) ? (
-                <ChevronUp className="w-4 h-4 text-gray-500" />
-              ) : (
-                <ChevronDown className="w-4 h-4 text-gray-500" />
-              )}
-            </div>
-          </button>
-          <div
-            className={`transition-all duration-300 ease-in-out overflow-hidden ${
-              expandedBarriers.includes(key) ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-            }`}
-          >
-            <div className={`p-4 border-t border-gray-200 ${barrierColors[key]}`}>
-              <ul className="space-y-3">
+
+            <div className={`p-5 border-t ${colors.borderColor}`}>
+              <ul className="space-y-4">
                 {barrierGroup.map((barrier, idx) => (
-                  <li key={idx} className="text-sm">
-                    <div className="flex items-start gap-2 bg-white p-3 rounded-lg shadow-sm hover:shadow-md transition-all duration-300">
-                      <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
-                      <div className="space-y-2">
-                        <span className="text-gray-800 font-medium">{barrier.description}</span>
-                        {barrier.subpoints && (
-                          <ul className="ml-4 space-y-1">
-                            {barrier.subpoints.map((subpoint, subIdx) => (
-                              <li
-                                key={subIdx}
-                                className="text-gray-600 flex items-center gap-2 before:content-['•'] before:text-purple-400"
-                              >
-                                <span className="text-xs leading-relaxed">{subpoint}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
+                  <li 
+                    key={idx} 
+                    className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+                  >
+                    <div className="p-4">
+                      {barrier.subpoints && (
+                        <ul className="space-y-2">
+                          {barrier.subpoints.map((subpoint, subIdx) => (
+                            <li 
+                              key={subIdx}
+                              className="flex items-start gap-2 text-sm text-gray-700"
+                            >
+                              <span className="text-purple-500 mt-1">•</span>
+                              <span className="text-xs font-bold text-gray-700">{subpoint}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
-
 
 
 export default JourneyStage;

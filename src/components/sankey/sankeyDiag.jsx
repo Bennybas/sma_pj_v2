@@ -16,15 +16,16 @@ const SankeyDiagram = () => {
     svg.attr("width", width)
        .attr("height", height);
 
-    // Softer, more pleasant color palette
+    // Updated color palette
     const colorScale = d3.scaleOrdinal()
       .domain([
-        "Patients", "Male", "Female", "Boy", "Male", 
-        "Girl", "Female", "PCP", "Pediatrician", "Neurologist"
+        "Patients", "Male", "Female", "Boy", "Teen", "Male", 
+        "Girl", "Female", "Adult", "PCP", "Pediatrician", "Neurologist"
       ])
       .range([
         "#E3F2FD", "#BBDEFB", "#F8BBD0", "#C8E6C9", "#B3E5FC", 
-        "#FFCDD2", "#FFEBEE", "#80DEEA", "#B2DFDB", "#C8E6C9"
+        "#FFCDD2", "#FFEBEE", "#80DEEA", "#B2DFDB", "#A5D6A7", 
+        "#81D4FA", "#C8E6C9"
       ]);
 
     const data = {
@@ -32,29 +33,39 @@ const SankeyDiagram = () => {
         { name: "Patients", value: 100 },
         { name: "Male", value: 60 },
         { name: "Female", value: 40 },
-        { name: "Children", value: 40 },
+        { name: "Children", value: 25 },
+        { name: "Teen", value: 15 },
         { name: "Adult", value: 20 },
-        { name: "Children", value: 30 },
+        { name: "Children", value: 20 },
+        { name: "Teen", value: 10 },
         { name: "Adult", value: 10 },
-        { name: "PCP", value: 50 },
-        { name: "Pediatrician", value: 50 },
+        { name: "PCP", value: 30 },
+        { name: "Pediatrician", value: 35 },
         { name: "Neurologist", value: 65 }
       ],
       links: [
         { source: 0, target: 1, value: 60 },
         { source: 0, target: 2, value: 40 },
-        { source: 1, target: 3, value: 40 },
-        { source: 1, target: 4, value: 20 },
-        { source: 2, target: 5, value: 30 },
-        { source: 2, target: 6, value: 10 },
-        { source: 3, target: 7, value: 10 },
-        { source: 3, target: 8, value: 30 },
-        { source: 4, target: 7, value: 20 },
-        { source: 5, target: 7, value: 10 },
-        { source: 5, target: 8, value: 20 },
-        { source: 6, target: 7, value: 10 },
-        { source: 7, target: 9, value: 30 },
-        { source: 8, target: 9, value: 35 }
+        { source: 1, target: 3, value: 25 },
+        { source: 1, target: 4, value: 15 },
+        { source: 1, target: 5, value: 20 },
+        { source: 2, target: 6, value: 20 },
+        { source: 2, target: 7, value: 10 },
+        { source: 2, target: 8, value: 10 },
+        { source: 3, target: 9, value: 10 },
+        { source: 3, target: 10, value: 15 },
+        { source: 4, target: 9, value: 5 },
+        { source: 4, target: 11, value: 10 },
+        { source: 5, target: 9, value: 10 },
+        { source: 5, target: 11, value: 10 },
+        { source: 6, target: 9, value: 10 },
+        { source: 6, target: 10, value: 10 },
+        { source: 7, target: 9, value: 5 },
+        { source: 7, target: 11, value: 5 },
+        { source: 8, target: 9, value: 5 },
+        { source: 8, target: 11, value: 5 },
+        { source: 9, target: 11, value: 20 },
+        { source: 10, target: 11, value: 25 }
       ]
     };
 
@@ -87,7 +98,6 @@ const SankeyDiagram = () => {
           .attr("stroke-opacity", 0.8)
           .attr("stroke-width", d.width * 1.2);
         
-        // Enhanced tooltip
         const tooltip = chart.append("g")
           .attr("class", "link-tooltip");
         
@@ -115,7 +125,6 @@ const SankeyDiagram = () => {
         chart.selectAll(".link-tooltip").remove();
       });
 
-    // Enhanced nodes
     const node = chart.append("g")
       .selectAll(".node")
       .data(nodes)
@@ -123,12 +132,11 @@ const SankeyDiagram = () => {
       .attr("class", "node")
       .attr("transform", d => `translate(${d.x0},${d.y0})`);
 
-    // Node rectangles with softer corners
     node.append("rect")
       .attr("height", d => d.y1 - d.y0)
       .attr("width", d => d.x1 - d.x0)
       .attr("fill", d => colorScale(d.name))
-      .attr("rx", 4)  // Rounded corners
+      .attr("rx", 4)
       .attr("stroke", "#fff")
       .attr("stroke-width", 1)
       .attr("opacity", 0.9)
@@ -136,7 +144,6 @@ const SankeyDiagram = () => {
       .on("mouseover", function(event, d) {
         d3.select(this).attr("opacity", 1);
         
-        // Enhanced node tooltip
         const tooltip = chart.append("g")
           .attr("class", "node-tooltip");
         
@@ -162,7 +169,6 @@ const SankeyDiagram = () => {
         chart.selectAll(".node-tooltip").remove();
       });
 
-    // Improved node labels
     node.append("text")
       .attr("x", d => (d.x1 - d.x0) / 2)
       .attr("y", d => (d.y1 - d.y0) / 2)
@@ -178,7 +184,7 @@ const SankeyDiagram = () => {
 
   return (
     <div className="w-full overflow-x-auto">
-      <h4 className="text-sm font-medium text-gray-700 mb-4">Patient Flow</h4>
+      <h3 className="text-sm font-bold text-gray-700 mb-4">Initial Assessment to Specialist Referral Flow</h3>
       <svg ref={svgRef}></svg>
     </div>
   );
