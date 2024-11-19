@@ -37,51 +37,39 @@ export const journeyData = [
         { value: "1 in 15,000", label: "Incidence rate of SMA based on U.S. public health state labs data" }
       ]
       ,
-      barriers : {
+      barriers: {
         physician: [
           {
             description: "Delayed Symptom Recognition",
             subpoints: [
-              "52% of patients or caregivers report delays in recognizing initial symptoms."
+              "52% of patients or caregivers report delays in recognizing initial symptoms, impacting timely diagnosis."
             ]
           },
           {
-            description: "Access to Primary Care",
+            description: "Limited Accessibility for Disabled Patients",
             subpoints: [
-              "30% of patients face logistical challenges in accessing primary care facilities."
+              "15% of healthcare facilities are inadequately equipped to handle physically disabled patients."
             ]
           },
           {
-            description: "Rural Location Challenges",
+            description: "Rural and Logistical Challenges",
             subpoints: [
-              "35% of cases report geographic limitations, reducing timely access to diagnostic services."
-            ]
-          },
-          {
-            description: "Transportation Issues",
-            subpoints: [
-              "40% of patients face barriers related to reliable transport for initial evaluation."
-            ]
-          },
-          {
-            description: "Physical Infrastructural Gaps",
-            subpoints: [
-              "25% of primary care centers lack basic diagnostic equipment for SMA screening."
-            ]
-          },
-          {
-            description: "Limited Accessibility for Disabled Individuals",
-            subpoints: [
-              "15% of healthcare facilities are not adequately equipped to handle physically disabled patients."
+              "35% of cases report geographic limitations, while 40% face transportation-related issues for timely evaluations."
             ]
           }
         ],
-        
+      
         system: [
           {
-            description: "Inadequate Cognitive Assessment Tools",
+            description: "Insufficient Diagnostic and Screening Infrastructure",
             subpoints: [
-              "45% of physicians report reliance on outdated tools during initial evaluations."
+              "25% of clinics lack genetic testing facilities, and 50% of providers express uncertainty about standardized SMA screening protocols."
+            ]
+          },
+          {
+            description: "Staff and Resource Constraints",
+            subpoints: [
+              "40% of clinics report staff shortages, leading to delays in evaluations, while 45% of physicians rely on outdated assessment tools."
             ]
           },
           {
@@ -89,98 +77,58 @@ export const journeyData = [
             subpoints: [
               "Only 30% of primary care physicians have immediate access to specialists for neuromuscular disorders."
             ]
-          },
-          {
-            description: "Resource Constraints in Primary Care",
-            subpoints: [
-              "40% of clinics report staff shortages, delaying comprehensive evaluations."
-            ]
-          },
-          {
-            description: "Insufficient Diagnostic Support",
-            subpoints: [
-              "25% of primary care settings lack genetic testing facilities."
-            ]
-          },
-          {
-            description: "Lack of Standardized Screening Protocols",
-            subpoints: [
-              "50% of primary care providers express uncertainty about proper SMA screening methods."
-            ]
-          },
-          {
-            description: "Complexity of Differential Diagnosis",
-            subpoints: [
-              "35% of cases are misdiagnosed initially, leading to delays in appropriate referrals."
-            ]
           }
         ],
-        
+      
         patient: [
           {
             description: "Delayed Symptom Reporting",
             subpoints: [
-              "Over 40% of patients or caregivers delay seeking medical advice due to symptom misinterpretation."
+              "Over 40% of patients or caregivers delay seeking medical advice due to misinterpretation of symptoms."
             ]
           },
           {
-            description: "Fear and Stigma",
+            description: "Financial and Logistical Barriers",
             subpoints: [
-              "28% of families report hesitancy in approaching physicians due to stigma around neuromuscular diseases."
+              "50% of patients report financial challenges, while 30% face logistical hurdles accessing primary care."
             ]
           },
           {
-            description: "Limited Awareness of Early Signs",
+            description: "Awareness and Literacy Gaps",
             subpoints: [
-              "60% of patients/caregivers are unaware of SMA-specific symptoms at the onset."
-            ]
-          },
-          {
-            description: "Financial Constraints",
-            subpoints: [
-              "50% of patients report delays in seeking care due to financial limitations."
-            ]
-          },
-          {
-            description: "Low Health Literacy",
-            subpoints: [
-              "35% of families struggle with understanding medical terminologies and diagnoses."
-            ]
-          },
-          {
-            description: "Cultural Barriers",
-            subpoints: [
-              "20% of families from minority groups report cultural hesitance in accessing primary care."
+              "60% of patients or caregivers are unaware of SMA-specific symptoms, and 35% struggle with understanding medical diagnoses."
             ]
           }
         ]
-      },
+      }      
+      ,
       findings: [
         {
-          description: "SMA Types 3 and 4 Prevalence",
+          description: "Stable SMA Types 3 and 4 Population",
           subpoints: [
-            "SMA Types 3 and 4 prevalence remained relatively stable over the past several years, indicating a consistent patient population. This suggests ongoing management needs for this demographic."
+            "Prevalence remains consistent, underscoring the ongoing need for dedicated care and resources."
           ]
         },
         {
-          description: "Pediatric vs. Adult Care Access",
+          description: "Unequal Access to Specialized Care",
           subpoints: [
-            "Pediatric SMA patients access a wider range of specialized care than adults, highlighting an unequal distribution of healthcare resources. This disparity may affect overall patient outcomes."
+            "Pediatric patients receive better specialized care than adults, highlighting disparities that affect outcomes."
           ]
         },
         {
           description: "Delays in Diagnosis",
           subpoints: [
-            "Significant delays in diagnosis stem from multiple barriers including delayed symptom recognition, access limitations, and systemic weaknesses in initial assessment. These delays negatively impact timely intervention and treatment."
+            "Barriers like symptom recognition delays and weak assessment systems lead to late interventions."
           ]
         },
         {
-          description: "Geographic and Infrastructure Barriers",
+          description: "Geographic and Infrastructure Challenges",
           subpoints: [
-            "Geographic limitations, transportation difficulties, and limited primary care access, compounded by inadequate primary care infrastructure, significantly hinder timely SMA evaluation."
+            "Issues with location, transport, and care facilities hinder timely evaluation and treatment."
           ]
         }
-      ]      
+      ]
+        
       
     },
     {
@@ -219,148 +167,100 @@ export const journeyData = [
       barriers: {
         physician: [
           {
-            description: "Limited Genetic Testing Facilities",
+            description: "Limited Access to Advanced Diagnostics",
             subpoints: [
-              "45% of healthcare centers lack access to genetic testing labs.",
-              "30% of diagnostic labs report delays exceeding two weeks for genetic testing results."
+              "45% of healthcare centers lack genetic testing facilities.",
+              "Only 35% of rural areas have access to advanced SMN1/SMN2 copy diagnostics."
             ]
           },
           {
-            description: "Delayed Laboratory Reports",
+            description: "Resource and Cost Challenges",
             subpoints: [
-              "30% of diagnostic labs report delays exceeding two weeks for genetic testing results."
+              "25% of tertiary care centers lack sufficient resources for rare disorder diagnostics.",
+              "High costs (~40% of families struggle to afford genetic tests)."
             ]
           },
           {
-            description: "Accessibility to Advanced Testing (SMN1/SMN2 Copy)",
+            description: "Long Wait Times for Referrals",
             subpoints: [
-              "Only 35% of rural areas have immediate access to advanced diagnostic services."
-            ]
-          },
-          {
-            description: "Resource Scarcity for Rare Disorders",
-            subpoints: [
-              "25% of tertiary care centers have insufficient diagnostic resources for rare disorders."
-            ]
-          },
-          {
-            description: "Cost of Genetic Testing",
-            subpoints: [
-              "High out-of-pocket costs (~40% of families struggle to afford genetic tests)."
-            ]
-          },
-          {
-            description: "Long Waiting Times at Referral Facilities",
-            subpoints: [
-              "33% of patients report waiting over four weeks for appointments at specialized centers."
+              "33% of patients experience delays exceeding four weeks for specialized appointments."
             ]
           }
         ],
         system: [
           {
-            description: "Limited Trained Genetic Counselors",
+            description: "Fragmented Diagnostic Infrastructure",
             subpoints: [
-              "Only 20% of centers have dedicated staff to guide patients through genetic testing."
+              "35% of referrals are delayed due to bureaucratic inefficiencies.",
+              "40% of diagnostic centers face challenges in accessing prior medical records."
             ]
           },
           {
-            description: "Fragmented Diagnostic Pathways",
+            description: "Insufficient Specialist Networks",
             subpoints: [
-              "35% of referrals between general practitioners and specialists are delayed due to bureaucratic inefficiencies."
+              "Only 30% of regions have adequate neuromuscular specialists.",
+              "Overreliance on overloaded tertiary centers delays diagnostics for 25% of cases."
             ]
           },
           {
-            description: "Inconsistent Insurance Coverage",
+            description: "Inconsistent Insurance Support",
             subpoints: [
               "50% of insurance plans exclude or limit coverage for genetic testing."
-            ]
-          },
-          {
-            description: "Inadequate Specialist Networks",
-            subpoints: [
-              "Only 30% of regions have sufficient neuromuscular specialists."
-            ]
-          },
-          {
-            description: "Lack of Data Sharing Between Clinics",
-            subpoints: [
-              "40% of diagnostic facilities report difficulty accessing patients' prior medical records."
-            ]
-          },
-          {
-            description: "Overreliance on Tertiary Care",
-            subpoints: [
-              "25% of diagnostic cases rely heavily on overloaded tertiary centers, delaying confirmations."
             ]
           }
         ],
         patient: [
           {
-            description: "Financial Constraints",
+            description: "Economic and Awareness Barriers",
             subpoints: [
-              "60% of families face economic challenges in affording advanced diagnostics."
+              "60% of families struggle to afford diagnostics.",
+              "45% of patients/caregivers lack understanding of genetic testing's importance."
             ]
           },
           {
-            description: "Fear of Genetic Testing",
+            description: "Cultural and Psychological Hesitations",
             subpoints: [
-              "25% of patients express anxiety over undergoing invasive or unfamiliar testing procedures."
+              "30% of families fear stigma from genetic diagnoses.",
+              "25% of patients express anxiety about invasive or unfamiliar tests."
             ]
           },
           {
-            description: "Lack of Trust in Medical Systems",
-            subpoints: [
-              "20% of patients feel hesitant about the reliability of diagnostic facilities."
-            ]
-          },
-          {
-            description: "Low Awareness About Testing Benefits",
-            subpoints: [
-              "45% of patients/caregivers do not understand the necessity of genetic confirmation."
-            ]
-          },
-          {
-            description: "Fear of Genetic Disorders' Stigma",
-            subpoints: [
-              "30% of families avoid testing due to potential stigmatization."
-            ]
-          },
-          {
-            description: "Misinterpretation of Symptoms",
+            description: "Symptom Misinterpretation",
             subpoints: [
               "50% of patients believe initial symptoms do not warrant advanced testing."
             ]
           }
         ]
-        
-      },
+      }
+      ,
 
       findings: [
         {
-          description: "Urban-Rural Disparity",
+          description: "Urban-Rural Diagnostic Disparities",
           subpoints: [
-            "Only 35% of rural areas have immediate access to advanced testing (e.g., SMN2 copy determination), causing delays for patients outside urban centers."
+            "Only 35% of rural areas have access to advanced testing, leading to significant delays for non-urban patients."
           ]
         },
         {
-          description: "Cost Barriers",
+          description: "Economic Barriers to Testing",
           subpoints: [
-            "Genetic testing costs remain prohibitive for ~40% of families, emphasizing the need for financial assistance or insurance reforms."
+            "Genetic testing remains unaffordable for ~40% of families, highlighting the need for cost-effective solutions or better insurance coverage."
           ]
         },
         {
-          description: "Delays in Testing Reports",
+          description: "Prolonged Diagnostic Timelines",
           subpoints: [
-            "30% of labs report delays in generating results, prolonging the diagnostic journey."
+            "30% of labs experience delays in generating genetic testing results, extending the diagnostic process."
           ]
         },
         {
-          description: "Late Diagnoses for Milder Types",
+          description: "Delayed Diagnoses in Milder SMA Cases",
           subpoints: [
-            "The average age of diagnosis for cases not identified via newborn screening remains high, particularly for SMA Types 3 and 4, at 8.1 years in 2023."
+            "The average diagnosis age for SMA Types 3 and 4 remains high at 8.1 years, especially in the absence of newborn screening."
           ]
         }
-      ]      
+      ]
+            
 
       
     },
@@ -402,141 +302,98 @@ export const journeyData = [
       barriers: {
         physician: [
           {
-            description: "Long Wait Times for Approved Therapies",
+            description: "Limited Accessibility to SMA-Approved Therapies",
             subpoints: [
-              "30% of families experience delays exceeding three months for therapy approval.",
-              "25% of patients face logistical barriers in accessing facilities for Zolgensma or Spinraza."
+              "40% of rural populations lack access to SMA-specialized treatment centers.",
+              "35% of rehabilitation facilities report staffing shortages, impacting therapy delivery."
             ]
           },
           {
-            description: "Accessibility to SMA-Approved Centers",
+            description: "Delays in Therapy Approval and Supply",
             subpoints: [
-              "40% of rural populations have access to SMA-specialized treatment centers.",
-              "35% of SMA-specialized centers report staffing shortages."
+              "30% of families experience therapy approval delays exceeding three months.",
+              "20% of patients report delays in procuring SMA medications due to supply chain issues."
             ]
           },
           {
-            description: "Supply Chain Issues for Medications",
+            description: "High Financial Burden on Families",
             subpoints: [
-              "20% of cases report delays in procuring prescribed medications."
-            ]
-          },
-          {
-            description: "Challenges in Physical Therapy Accessibility",
-            subpoints: [
-              "35% of patients report difficulties accessing regular rehabilitation facilities."
-            ]
-          },
-          {
-            description: "High Therapy Costs",
-            subpoints: [
-              "50% of families report financial challenges in initiating approved therapies."
+              "50% of families struggle with the high costs of initiating SMA-approved therapies."
             ]
           }
         ],
         system: [
           {
-            description: "Insurance Denial for Gene Therapy",
+            description: "Insurance and Regulatory Barriers",
             subpoints: [
-              "50% of applications for expensive treatments like Zolgensma are denied initially."
+              "50% of applications for gene therapies like Zolgensma are denied initially.",
+              "15% of new SMA therapies face delays in regional licensing processes."
             ]
           },
           {
-            description: "Overburdened Healthcare Centers",
+            description: "Overburdened Healthcare Infrastructure",
             subpoints: [
-              "35% of SMA-specialized centers report staffing shortages."
-            ]
-          },
-          {
-            description: "Lack of Comprehensive Treatment Guidelines",
-            subpoints: [
-              "25% of general practitioners lack clear guidelines for SMA therapies."
-            ]
-          },
-          {
-            description: "Inefficient Coordination Between Providers",
-            subpoints: [
-              "30% of families report delays due to lack of communication among healthcare providers."
+              "35% of SMA-specialized centers face staffing shortages, delaying patient care."
             ]
           },
           {
             description: "Limited Access to Clinical Trials",
             subpoints: [
-              "Only 20% of eligible patients are enrolled in ongoing trials."
-            ]
-          },
-          {
-            description: "Regulatory Delays in Therapy Approvals",
-            subpoints: [
-              "15% of new SMA therapies face delays in regional licensing processes."
+              "Only 20% of eligible patients are enrolled in ongoing clinical trials."
             ]
           }
         ],
         patient: [
           {
-            description: "Non-Adherence to Therapy",
+            description: "Challenges in Therapy Adherence",
             subpoints: [
-              "25% of patients struggle to maintain consistent therapy schedules."
+              "25% of patients struggle to maintain consistent therapy schedules.",
+              "30% of families face mobility or transportation issues affecting regular treatment."
             ]
           },
           {
-            description: "Fear of Side Effects",
+            description: "Knowledge and Trust Barriers",
             subpoints: [
-              "30% of caregivers express concerns about potential adverse effects of SMA treatments."
+              "40% of patients or caregivers lack awareness about approved SMA therapies.",
+              "20% of families hesitate to adopt novel treatments due to trust concerns."
             ]
           },
           {
-            description: "Lack of Knowledge About Treatment Options",
+            description: "Fear of Treatment Side Effects",
             subpoints: [
-              "40% of patients/caregivers remain unaware of approved therapies."
-            ]
-          },
-          {
-            description: "Low Trust in Novel Therapies",
-            subpoints: [
-              "20% of families hesitate to adopt recently approved treatments."
-            ]
-          },
-          {
-            description: "Delayed Decision-Making",
-            subpoints: [
-              "35% of families take longer to approve treatments due to financial and emotional concerns."
-            ]
-          },
-          {
-            description: "Transport and Mobility Limitations",
-            subpoints: [
-              "30% of families report difficulties in attending regular treatment sessions."
+              "30% of caregivers express concerns about potential adverse effects of SMA therapies."
             ]
           }
         ]
-      },
+      }
+      ,
       findings: [
         {
-          description: "Adults’ Lower Treatment Rates",
+          description: "Higher Untreated Rates Among Adults",
           subpoints: [
-            "Adults have the highest percentage of untreated individuals, potentially due to diagnostic delays or patient choice."
+            "Adults have the highest proportion of untreated individuals, driven by diagnostic delays or personal choice."
           ]
         },
         {
-          description: "Efficacy and Safety",
+          description: "Safety and Efficacy Considerations",
           subpoints: [
-            "While efficacy remains the top consideration, teens prioritize safety equally with efficacy (36%), unlike adults (26%)."
+            "Teens prioritize safety equally with efficacy (36%), whereas adults place slightly less emphasis on safety (26%)."
           ]
         },
         {
-          description: "Insurance Denials",
+          description: "Barriers to Medical Equipment Access",
           subpoints: [
-            "50% of adults faced denials for durable medical equipment, highlighting significant barriers in accessing necessary resources."
+            "50% of adults faced insurance denials for durable medical equipment, underscoring significant access challenges."
           ]
         },
         {
-          description: "Multiple Treatments",
+          description: "Higher Treatment Frequency in Children",
           subpoints: [
-            "28% of individuals received two or more treatments, with children more likely to undergo multiple therapies compared to teens and adults."
+            "Children are more likely to receive multiple therapies (28%) compared to teens and adults."
           ]
         }
       ]
+      
       
       
     }

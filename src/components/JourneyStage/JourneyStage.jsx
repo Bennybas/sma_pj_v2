@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Card } from '../ui/card';
+import SankeyDiagram from '../sankey/sankeyDiag';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer, ComposedChart 
+  LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer, ComposedChart, 
+  Sankey
 } from 'recharts';
 import {
   ArrowRight, Stethoscope, Building2, User, LineChart as LineChartIcon,
   ClipboardCheck, AlertTriangle, ChevronDown, ChevronUp
 } from 'lucide-react';
+import DonutChart from '../donut/donutchart';
 
 const JourneyStage = ({ stage, metrics, barriers, findings }) => {
   const [hoveredAction, setHoveredAction] = useState(null);
@@ -45,26 +48,44 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
         ];
   
         const smaDistributionData = [
-          { specialist: "Paediatric Neurologist", paediatric: 245, adult: 48 },
-          { specialist: "Physical Therapist", paediatric: 225, adult: 130 },
-          { specialist: "Pulmonologist", paediatric: 210, adult: 145 },
-          { specialist: "Occupational Therapist", paediatric: 165, adult: 65 },
-          { specialist: "Nutritionist", paediatric: 150, adult: 55 },
-          { specialist: "Orthopaedic Surgeon", paediatric: 145, adult: 45 },
-          { specialist: "Social Worker", paediatric: 115, adult: 55 },
-          { specialist: "Speech Pathologist", paediatric: 105, adult: 15 },
-          { specialist: "Gastroenterologist", paediatric: 90, adult: 50 },
-          { specialist: "Cardiologist", paediatric: 60, adult: 37 },
-          { specialist: "Psychologist", paediatric: 25, adult: 45 },
-          { specialist: "Adult Neurologist", paediatric: 5, adult: 210 }
+          {
+            category: "Neurology-related Specialists",
+            paediatric: 98,
+            adult: 84,
+          },
+          {
+            category: "Therapists and Rehabilitative Care",
+            paediatric: 90,
+            adult: 52,
+          },
+          {
+            category: "Respiratory & Cardiovascular Care",
+            paediatric: 83,
+            adult: 58,
+          },
+          {
+            category: "Nutritional & Gastrointestinal Care",
+            paediatric: 58,
+            adult: 22,
+          },
+          {
+            category: "Musculoskeletal Care",
+            paediatric: 57,
+            adult: 18,
+          },
+          {
+            category: "Social and Psychological Support",
+            paediatric: 45,
+            adult: 22,
+          },
         ];
+        
   
         return {
           type: 'line',
           lineData: smaTrendsData,
-          
           smaDistributionData: smaDistributionData,
-          title: 'SMA Type Distribution and Trends'
+          
         };
       }
       case 2: {
@@ -152,6 +173,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
       return (
         <div className="w-full space-y-6">
           <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+          <SankeyDiagram />
           <div className="grid grid-cols-2 gap-8">
             {/* Line Chart - Historical Trends */}
             <Card className="p-4">
@@ -202,25 +224,29 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
             {/* Specialists Chart */}
             <Card className="p-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-4">Types of Specialists Seen by SMA Patients</h4>
-                <div className="h-[500px]"> {/* Adjust height as needed */}
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart layout="vertical" data={smaDistributionData}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <YAxis 
-                        type="category" 
-                        dataKey="specialist" 
-                        width={160}
-                      />
-                      <XAxis type="number" />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="paediatric" fill="#8884d8" name="Paediatric" />
-                      <Bar dataKey="adult" fill="#82ca9d" name="Adult" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </Card>
+              <h4 className="text-sm font-medium text-gray-700 mb-4">
+                Distribution of Specialists by Category (%)
+              </h4>
+              <div className="h-[500px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart layout="vertical" data={smaDistributionData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <YAxis
+                      type="category"
+                      dataKey="category"
+                      width={200}
+                    />
+                    <XAxis type="number" />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="paediatric" fill="#8884d8" name="Paediatric" stackId="a" />
+                    <Bar dataKey="adult" fill="#82ca9d" name="Adult" stackId="a" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </Card>
+
+
           </div>
         </div>
       );
@@ -230,25 +256,11 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           <div className="w-full space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
             <div className="grid grid-cols-2 gap-8">
-              <Card className="p-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-4">Gender and Age wise Distribution</h4>
-                <div className="h-72">
-                  <ResponsiveContainer>
-                    <BarChart data={motorFunctionData} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="name" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="Type3" stackId="a" fill="#FFCE56" name="Type 3" />
-                      <Bar dataKey="Type4" stackId="a" fill="#4BC0C0" name="Type 4" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </div>
-              </Card>
-
-              <Card className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Time to Treatment Trend</h4>
+            <Card className="p-6">
+            <DonutChart />
+            </Card>
+            <Card className="p-6">
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Age(years) SMA Diagnosis</h4>
                   <div className="aspect-[4/3] w-full">
                     <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={lineData1}>
@@ -264,8 +276,6 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   </div>
                 </Card>
             </div>
-
-
            
             <div className="grid grid-cols-2 gap-8">
               <Card className="p-6">
@@ -298,6 +308,9 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   </ResponsiveContainer>
                 </div>
               </Card>
+              
+              
+              
               </div>
             </div>
           
@@ -562,20 +575,23 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     </div>
   );
 };
-
 const KeyBarriers = ({ barriers }) => {
-  // Set the initial state to the first barrier group (or any default group)
-  const [expandedBarrier, setExpandedBarrier] = useState(Object.keys(barriers)[0]);
+  // Use an array to track expanded barriers
+  const [expandedBarriers, setExpandedBarriers] = useState([]);
 
   const toggleBarrier = (key) => {
-    setExpandedBarrier(expandedBarrier === key ? null : key);
+    setExpandedBarriers((prevExpanded) =>
+      prevExpanded.includes(key)
+        ? prevExpanded.filter((barrier) => barrier !== key) // Collapse if already expanded
+        : [...prevExpanded, key] // Expand if not already expanded
+    );
   };
 
   // Define colors for each barrier type
   const barrierColors = {
-    physician: 'bg-red-100', 
-    system: 'bg-blue-100',   
-    patient: 'bg-green-100', 
+    physician: 'bg-red-100',
+    system: 'bg-blue-100',
+    patient: 'bg-green-100',
   };
 
   return (
@@ -593,16 +609,18 @@ const KeyBarriers = ({ barriers }) => {
               <h4 className="text-sm font-semibold capitalize">{key}</h4>
             </div>
             <div className="transform transition-transform duration-200">
-              {expandedBarrier === key ? (
+              {expandedBarriers.includes(key) ? (
                 <ChevronUp className="w-4 h-4 text-gray-500" />
               ) : (
                 <ChevronDown className="w-4 h-4 text-gray-500" />
               )}
             </div>
           </button>
-          <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
-            expandedBarrier === key ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-          }`}>
+          <div
+            className={`transition-all duration-300 ease-in-out overflow-hidden ${
+              expandedBarriers.includes(key) ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+            }`}
+          >
             <div className={`p-4 border-t border-gray-200 ${barrierColors[key]}`}>
               <ul className="space-y-3">
                 {barrierGroup.map((barrier, idx) => (
@@ -614,7 +632,10 @@ const KeyBarriers = ({ barriers }) => {
                         {barrier.subpoints && (
                           <ul className="ml-4 space-y-1">
                             {barrier.subpoints.map((subpoint, subIdx) => (
-                              <li key={subIdx} className="text-gray-600 flex items-center gap-2 before:content-['•'] before:text-purple-400">
+                              <li
+                                key={subIdx}
+                                className="text-gray-600 flex items-center gap-2 before:content-['•'] before:text-purple-400"
+                              >
                                 <span className="text-xs leading-relaxed">{subpoint}</span>
                               </li>
                             ))}
@@ -632,6 +653,7 @@ const KeyBarriers = ({ barriers }) => {
     </div>
   );
 };
+
 
 
 export default JourneyStage;
