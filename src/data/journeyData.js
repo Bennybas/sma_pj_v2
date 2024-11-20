@@ -26,7 +26,7 @@ export const journeyData = [
 
     {
 
-      name: "Visit to Pediatrician or Primary Care Physician",
+      name: "Visit to PCP",
 
       content: "Initial discussion of observed symptoms and potential concerns."
 
@@ -226,9 +226,9 @@ export const journeyData = [
 
       { value: "50%", label: "Diagnosis Delay Rate (Type 4)" },
 
-      { value: "30–50%", label: "Misdiagnosis Rate (Initial)" },
+      { value: "30–50%", label: "Misdiagnosis Rate" },
 
-      { value: "8.1 years", label: "Average Age Not Identified by Screening" }
+      { value: "8.1 years", label: "Average Diagnosis age not identified by NBS" }
 
     ],
 
@@ -393,8 +393,8 @@ export const journeyData = [
     ]
     ,
     metrics: [
-      { value: "98%", label: "Treatment Utilization Rate (Overall)" },
-      { value: "21.7 Days", label: "Treatment Initiation Time (Average)" },
+      { value: "87%", label: "Treatment Utilization Rate" },
+      { value: "21.7 Days", label: "Average Treatment Initiation Time" },
       { value: "55%", label: "Insurance Denial Rate" },
       { value: "75%", label: "Successful Appeal Rate After Denial" },
       { value: "79%", label: "Proportion of Individuals Receiving Telemedicine" },

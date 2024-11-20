@@ -89,10 +89,10 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { name: 'Adults', Type3: 38, Type4: 5 },
         ];
         const SMN2  = [
-          { name: "1 Copy", Percentage: 3, Severity: "Severe (Type 1, Type 2)" },
-          { name: "2 Copies", Percentage: 36, Severity: "Severe (Type 1, Type 2)" },
-          { name: "3 Copies", Percentage: 48, Severity: "Mild (Type 3, Type 4)" },
-          { name: "4+ Copies", Percentage: 14, Severity: "Mild (Type 3, Type 4)" },
+          { name: "1-Copy", Percentage: 3, Severity: "Severe (Type 1, Type 2)" },
+          { name: "2-Copies", Percentage: 36, Severity: "Severe (Type 1, Type 2)" },
+          { name: "3-Copies", Percentage: 48, Severity: "Mild (Type 3, Type 4)" },
+          { name: "4+Copies", Percentage: 14, Severity: "Mild (Type 3, Type 4)" },
         ];
         const Screeningdata = [
           { name: 'Via Screening', value: 32 },
@@ -113,8 +113,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { distance: '>50Km', value: 26.23, fill: '#8884d8' }  // Blue
         ];
         const waitTimeData = [
-          { category: "Children (2-12 years)", "<= 2 weeks": 11.5, "> 2 weeks": 88.5 },
-          { category: "Adolescents (13-17 years)", "<= 2 weeks": 0.0, "> 2 weeks": 100.0 },
+          { category: "Children", "<= 2 weeks": 11.5, "> 2 weeks": 88.5 },
+          { category: "Teen", "<= 2 weeks": 0.0, "> 2 weeks": 100.0 },
         ];
         
         
@@ -269,10 +269,11 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   <YAxis />
                   <Tooltip formatter={(value) => `${value}%`} />
                   <Legend />
-                  <Bar dataKey="<= 2 weeks" fill="#82ca9d" name="<= 2 weeks" />
-                  <Bar dataKey="> 2 weeks" fill="#8884d8" name="> 2 weeks" />
+                  <Bar dataKey="<= 2 weeks" fill="#82ca9d" name="<= 2 weeks" stackId="a" />
+                  <Bar dataKey="> 2 weeks" fill="#8884d8" name="> 2 weeks" stackId="a" />
                 </BarChart>
               </ResponsiveContainer>
+
             </div>
 
             </Card>
@@ -290,9 +291,9 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
-                    <YAxis label={{ value: "Percentage (%)", angle: -90, position: "insideLeft" }} />
+                    <YAxis label={{ value: "Percentage", angle: -90, position: "insideLeft" }} />
                     <Tooltip />
-                    <Legend />
+                    
                     <Bar dataKey="Percentage" name="Percentage" />
                   </BarChart>
                 </ResponsiveContainer>
@@ -305,40 +306,39 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               <div className="aspect-[4/3] w-full">
 
               <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={distanceAccessData}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius="60%"
-                      outerRadius="80%"
-                      paddingAngle={5}
-                      dataKey="value" // This key is for the chart's data
-                    >
-                      {distanceAccessData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.fill} />
-                      ))}
-                    </Pie>
-                    <Tooltip
-                      formatter={(value) => `${value}%`}
-                      contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
-                    />
-                    {/* Adjusted Legend */}
-                    <Legend
-                      layout="horizontal"
-                      align="center"
-                      verticalAlign="bottom"
-                      wrapperStyle={{ fontSize: '12px', marginTop: '20px' }}
-                      payload={
-                        distanceAccessData.map((item) => ({
-                          value: item.distance, // Use 'distance' for legend labels
-                          type: 'square',      // Use 'square' shape for legend indicators
-                          color: item.fill     // Use corresponding fill color
-                        }))
-                      }
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
+                <PieChart>
+                  <Pie
+                    data={distanceAccessData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius="60%"
+                    outerRadius="80%"
+                    paddingAngle={5}
+                    dataKey="value"
+                  >
+                    {distanceAccessData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    formatter={(value, _, props) => `${props.payload.distance}: ${value}%`}
+                    contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
+                  />
+                  <Legend
+                    layout="horizontal"
+                    align="center"
+                    verticalAlign="bottom"
+                    wrapperStyle={{ fontSize: '12px', marginTop: '20px' }}
+                    payload={distanceAccessData.map((item) => ({
+                      value: item.distance, // Use 'distance' for legend labels
+                      type: 'square',      // Use 'square' shape for legend indicators
+                      color: item.fill     // Use corresponding fill color
+                    }))}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+
+
 
               </div>
             </Card>
@@ -438,6 +438,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
               
               <div className="grid grid-cols-3 gap-8">
+
+              <div className="p-6">
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Time between Diagnosis and First SMA Treatment</h4>
+                  <div className="aspect-[4/3] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart 
+                        data={treatmentData1}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="year" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line 
+                          type="monotone" 
+                          dataKey="value" 
+                          stroke="#8884d8"
+                          name="Days to Treatment"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+                
               <div className="p-4">
                 <h4 className="text-sm text-align-centre font-medium text-gray-700 mb-6">Insurance Coverage Status</h4>
                 <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
@@ -506,7 +532,20 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
 
 
-              <div className="p-4">
+              
+
+
+
+
+              
+              </div>
+
+
+              <div className="grid grid-cols-3 gap-8">
+                {/* Treatment Effectiveness Pie Chart */}
+
+
+                <div className="p-4">
                   <h4 className="text-sm font-medium text-gray-700 mb-6">Nutritional Feeding Support Type Percentage</h4>
                   <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                     <ResponsiveContainer width="100%" height="100%">
@@ -540,20 +579,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   </div>
               </div>
 
-
-              
-
-
-
-
-              
-              </div>
-
-
-              <div className="grid grid-cols-3 gap-8">
-                {/* Treatment Effectiveness Pie Chart */}
                 <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Factor Comparison</h4>
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Hospitalization Rate</h4>
                   <div className="aspect-[4/3] w-full">
                     {/* <ResponsiveContainer width="90%" height="90%">
                       <BarChart data={treatmentData}>
@@ -613,29 +640,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                 </div>
   
                 {/* Time to Treatment Trend Line Chart */}
-                <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Time between Diagnosis and First SMA Treatment</h4>
-                  <div className="aspect-[4/3] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart 
-                        data={treatmentData1}
-                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line 
-                          type="monotone" 
-                          dataKey="value" 
-                          stroke="#8884d8"
-                          name="Days to Treatment"
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
+                
 
 
 
