@@ -54,13 +54,14 @@ export const journeyData = [
 
     metrics:[
 
-      { value: "88%", label: "High Neurologist Utilization" },
+      { value: "84.81%", label: "Symptom Recognition Rate" },
 
       { value: "5.8 specialists", label: "Average Number of Specialists" },
 
       { value: "52.7%", label: "Genetic or Neurological Screening Recommendation Rate by PCP" },
 
-      { value: "1 in 15,000", label: "Incidence rate of SMA " }
+      { value: "1 in 15,000", label: "Incidence rate of SMA " },
+      { value: "16.8 months", label: "Average Time to Symptom Reporting (Type-III)" }
 
     ]
 
@@ -228,7 +229,7 @@ export const journeyData = [
 
       { value: "30–50%", label: "Misdiagnosis Rate" },
 
-      { value: "8.1 years", label: "Average Diagnosis age not identified by NBS" }
+      { value: "8.1 years", label: "Average Diagnosis age" }
 
     ],
 
@@ -400,6 +401,7 @@ export const journeyData = [
       { value: "79%", label: "Proportion of Individuals Receiving Telemedicine" },
       {value:"0.75 per 100",label:"Mortality Rate"},
       {value:"60%-70% ",label:"FDA-Approved Treatment Rate"}
+
     ],
     barriers: {
       physician: [

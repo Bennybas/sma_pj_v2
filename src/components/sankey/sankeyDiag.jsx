@@ -16,18 +16,19 @@ const SankeyDiagram = () => {
     svg.attr("width", width)
        .attr("height", height);
 
-    // Enhanced color palette with more distinct colors
+    // Medium-intensity color palette
     const colorScale = d3.scaleOrdinal()
       .domain([
         "Patients", "Male", "Female", "Boy", "Teen", "Male", 
         "Girl", "Female", "Adult", "PCP", "Pediatrician", "Neurologist"
       ])
       .range([
-        "#1565C0", "#2196F3", "#F50057", "#4CAF50", "#03A9F4", 
-        "#E91E63", "#FF5722", "#009688", "#FF9800", "#795548", 
-        "#9C27B0", "#607D8B"
+        "#90CAF9", "#64B5F6", "#EF9A9A", "#A5D6A7", "#81D4FA", 
+        "#F48FB1", "#F8BBD0", "#4DB6AC", "#FFCC80", "#A1887F", 
+        "#CE93D8", "#90A4AE"
       ]);
 
+    // Rest of the code remains exactly the same as previous version
     const data = {
       nodes: [
         { name: "Patients", value: 100 },
@@ -131,7 +132,7 @@ const SankeyDiagram = () => {
           .attr("y", (d.source.y0 + d.target.y0) / 2 - 10)
           .attr("text-anchor", "middle")
           .attr("fill", "#333")
-          .text(`${d.source.name} → ${d.target.name}: ${d.value} (${((d.value / 100) * 100).toFixed(1)}%)`)
+          .text(`${d.source.name} → ${d.target.name}: ${d.value} (${Math.round((d.value / 100) * 100)}%)`)
           .style("font-size", "13px")
           .style("color", "#00000")
           .style("font-weight", "500");
@@ -230,12 +231,13 @@ const SankeyDiagram = () => {
       .attr("y", d => (d.y1 - d.y0) / 2)
       .attr("dy", "0.35em")
       .attr("text-anchor", "middle")
-      .text(d => `${d.name}\n${((d.value / 100) * 100).toFixed(1)}%`)
-      .attr("fill", "#ffffff")
+      .text(d => `${d.name}\n${Math.round((d.value / 100) * 100)}%`)
+      .attr("fill", "#000000")
       .attr("font-weight", "600")
       .style("font-size", "12px")
-      .style("text-shadow", "1px 1px 2px rgba(0,0,0,0.3)")
-      .style("pointer-events", "none");
+      .style("text-shadow", "1px 1px 2px rgba(0,0,0,0)")
+      .style("pointer-events", "none")
+      .style("color", "#00000");
 
   }, []);
 
