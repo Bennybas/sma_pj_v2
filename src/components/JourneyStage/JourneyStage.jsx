@@ -4,7 +4,7 @@ import SankeyDiagram from '../sankey/sankeyDiag';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer, ComposedChart, 
-  Sankey,RadialBarChart,RadialBar
+  Sankey,RadialBarChart,RadialBar,BubbleChart,Bubble
 } from 'recharts';
 import {
   ArrowRight, Stethoscope, Building2, User, LineChart as LineChartIcon,
@@ -95,8 +95,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { name: "4+Copies", Percentage: 14, Severity: "Mild (Type 3, Type 4)" },
         ];
         const Screeningdata = [
-          { name: 'Screening-Based ', value: 32 },
-          { name: 'Symptom-Based ', value: 68 },
+          { name: 'Test Diagnosed', value: 32 },
+          { name: 'Symptom Diagnosed', value: 68 },
         ];
         const smaTrendsData = [
           { year: '2016', 'Type 3': 30, 'Type 4': 3 },
@@ -113,8 +113,14 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { distance: '>30 Miles', value: 26.23, fill: '#8884d8' }  // Blue
         ];
         const waitTimeData = [
-          { category: "Children", "<= 2 weeks": 11.5, "> 2 weeks": 88.5 },
-          { category: "Teen", "<= 2 weeks": 0.0, "> 2 weeks": 100.0 },
+          { category: "Children", "No of days": 14.2 },
+          { category: "Teen", "No of days": 21.5 },
+          { category: "Adult",  "No of days": 27.8 },
+        ];
+        const bubbledata = [
+          { area: 'Urban Areas', days: 15, population: 500000, x: 10, y: 5 },
+          { area: 'Suburban Areas', days: 24, population: 300000, x: 20, y: 10 },
+          { area: 'Rural Areas', days: 35, population: 100000, x: 30, y: 15 },
         ];
         
         
@@ -126,6 +132,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           lineData: smaTrendsData,
           distanceAccessData:distanceAccessData,
           waitTimeData:waitTimeData,
+          bubbledata:bubbledata
           
         };
     
@@ -154,11 +161,12 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { name: 'Appeal Pending', value: 4 },
         ];
         const insuranceData1 = [
-          { type: "Medicaid", pediatric: 55, adult: 56},
-          { type: "Medicare", pediatric: 11, adult: 38 },
-          { type: "Commercial", pediatric: 61, adult: 55 },
-          { type: "Commercial + Public", pediatric: 35, adult: 28}
+          { type: "Medicaid", value: 55.5 },
+          { type: "Medicare", value: 24.5 },
+          { type: "Commercial", value: 58 }
         ];
+        
+        
         
         // const breathingData = [
         //   { name: 'BPAP', value: 66, fill: '#8884d8' },
@@ -168,9 +176,9 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
         // ].sort((a, b) => b.value - a.value);
 
         const SMA_Treatments = [
-          { SMA_Treatments: '0 Treatments', Percentage: 3, fill: '#ff8042' },
-          { SMA_Treatments: '1 Treatments', Percentage: 67, fill: '#ffc658' },
-          { SMA_Treatments: '2+ Treatments', Percentage: 30, fill: '#a4de6c' }
+          
+          { SMA_Treatments: 'Monotherapy', Percentage: 67, fill: '#ffc658' },
+          { SMA_Treatments: 'Combined Therapy', Percentage: 30, fill: '#a4de6c' }
         ];
         
         
@@ -225,7 +233,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     const chartConfig = getChartData();
     if (!chartConfig) return null;
 
-    const { type, title, lineData, SMN2,distanceAccessData, treatmentData1, insuranceData1,insuranceData,feedingData,SMA_Treatments,Screeningdata,mortality,hospitalizationData,waitTimeData,impactData } = chartConfig;
+    const { type, title, lineData, SMN2,distanceAccessData, treatmentData1, insuranceData1,insuranceData,feedingData,SMA_Treatments,Screeningdata,mortality,hospitalizationData,waitTimeData,bubbledata } = chartConfig;
 
     switch (type) {
       case 'line':
@@ -273,7 +281,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             <div className="grid grid-cols-3 gap-8">
             <Card className="p-6">
             {/* <RadialChart /> */}
-            <h4 className="text-sm font-medium text-gray-700 mb-6">Wait Time to Specialist Consultation</h4>
+            <h4 className="text-sm font-medium text-gray-700 mb-6">Wait Time to Neurologist Consultation</h4>
             <div className="aspect-[4/3] w-full">
             <ResponsiveContainer width="105%" height="105%">
                 <BarChart
@@ -283,10 +291,10 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="category" />
                   <YAxis />
-                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Tooltip formatter={(value) => `${value} days`} />
                   <Legend />
-                  <Bar dataKey="<= 2 weeks" fill="#82ca9d" name="<= 2 weeks" stackId="a" />
-                  <Bar dataKey="> 2 weeks" fill="#8884d8" name="> 2 weeks" stackId="a" />
+                  <Bar dataKey="No of days" fill="#82ca9d" name="No of days" stackId="a" />
+                  {/* <Bar dataKey="> 2 weeks" fill="#8884d8" name="> 2 weeks" stackId="a" /> */}
                 </BarChart>
               </ResponsiveContainer>
 
@@ -368,7 +376,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
            
             <div className="grid grid-cols-2 gap-8">
               <Card className="p-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">Screening vs. Symptom-Driven Diagnosis</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-6">Diagnosis Method Breakdown</h4>
                 <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -443,6 +451,33 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                     </ResponsiveContainer>
                   </div>
               </Card>
+
+              {/* <Card className="p-4">
+                  <h4 className="text-sm font-medium text-gray-700 mb-4">Geographic Impact</h4>
+                  <div className="h-[400px]">
+
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BubbleChart data={bubbledata} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
+                      <XAxis dataKey="x" name="Area" />
+                      <YAxis dataKey="y" name="Days" />
+                      <Tooltip formatter={(value, name, props) => `${props.payload.area}: ${props.payload.days} days`} />
+                      <Legend />
+                      
+                      
+                      <Bubble
+                        dataKey="days"
+                        name="Days"
+                        fill="#8884d8"
+                        size={(bubbledata) => bubbledata.days * 5}  // Multiplied by 5 to control bubble size
+                      >
+                        {bubbledata.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.fill || '#82ca9d'} />
+                        ))}
+                      </Bubble>
+                    </BubbleChart>
+                  </ResponsiveContainer>
+                  </div>
+              </Card> */}
               
               
               
@@ -516,28 +551,27 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
               <div className="p-4">
                 <h4 className="text-sm font-medium text-gray-700 mb-6">Types of Insurance Among Pediatrics and Adults with SMA</h4>
-                <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
+                <div className="aspect-[4/3] w-full" >
                 <ResponsiveContainer width="100%" height="110%">
-                  <BarChart
-                    data={insuranceData1}
-                    layout="vertical" // Use vertical layout for horizontal bars
-                    margin={{ top: 20, right: 30, left: 50, bottom: 20 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis type="number" label={{ value: "Percentage", angle: 0, position: "insideBottom" }} />
-                    <YAxis dataKey="type" type="category" />
-                    <Tooltip formatter={(value) => `${value}%`} />
-                    <Legend layout="horizontal"  // Horizontal layout for legend
-                          align="center"       // Center the legend
-                          verticalAlign="bottom"/>
-                    
-                    
-                    <Bar dataKey="pediatric" name="Pediatric Patients" fill="#82ca9d" />
-                    
-                    
-                    <Bar dataKey="adult" name="Adult Patients" fill="#8884d8" />
-                  </BarChart>
-                </ResponsiveContainer>
+                    <BarChart layout="vertical" data={insuranceData1}>
+                      {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                      
+                      {/* Y-Axis: Use 'type' field for categories */}
+                      <YAxis dataKey="type" type="category" width={90} />
+                      
+                      <XAxis type="number" />
+                      <Tooltip formatter={(value) => `${value}%`} />
+                      {/* <Legend /> */}
+
+                      {/* Single Bar for each Insurance Type */}
+                      <Bar dataKey="value" fill="#8884d8" />
+                    </BarChart>
+                  </ResponsiveContainer>
+
+
+
+
+
 
 
                 </div>
@@ -561,46 +595,36 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   <h4 className="text-sm font-medium text-gray-700 mb-6">USE OF MULTIPLE TREATMENTS</h4>
                   <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={SMA_Treatments}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius="60%"
-                          outerRadius="80%"
-                          paddingAngle={5}
-                          dataKey="Percentage"  // Using 'Percentage' to define slice size
-                        >
-                          {SMA_Treatments.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={entry.fill} />
-                          ))}
-                        </Pie>
-                        <Tooltip
-                          content={({ payload }) => {
-                            // Render the custom tooltip with both label and percentage
-                            if (payload && payload.length) {
-                              const { name, value } = payload[0];
-                              // Format the label as "1-Treatments"
-                              const formattedName = `${name} Treatments`;
-                              return (
-                                <div style={{ backgroundColor: '#fff', padding: '10px', borderRadius: '8px' }}>
-                                  <strong>{formattedName}</strong>: {value}%
-                                </div>
-                              );
-                            }
-                            return null;
-                          }}
-                        />
-                        {/* Adjusted Legend */}
-                        <Legend
-                          layout="horizontal"  // Horizontal layout for legend
-                          align="center"       // Center the legend
-                          verticalAlign="bottom" // Place the legend at the bottom of the chart
-                          wrapperStyle={{ fontSize: '12px', marginTop: '20px' }} // Add margin for spacing
-                          formatter={(value) => `${value} Treatments`} // Format the label as "1-Treatments"
-                        />
-                      </PieChart>
-                    </ResponsiveContainer>
+  <PieChart>
+    <Pie
+      data={SMA_Treatments}
+      cx="50%"
+      cy="50%"
+      innerRadius="60%"
+      outerRadius="80%"
+      paddingAngle={5}
+      dataKey="Percentage"
+    >
+      {SMA_Treatments.map((entry, index) => (
+        <Cell key={`cell-${index}`} fill={entry.fill} />
+      ))}
+    </Pie>
+    
+    {/* Adjusted Legend */}
+    <Legend
+      layout="horizontal"  // Horizontal layout for legend
+      align="center"       // Center the legend
+      verticalAlign="bottom" // Place the legend at the bottom of the chart
+      formatter={(value, entry) => {
+        // Display the corresponding name for each treatment
+        const treatment = SMA_Treatments.find(item => item.Percentage === entry.payload.Percentage);
+        return treatment ? treatment.SMA_Treatments : value;
+      }}
+    />
+  </PieChart>
+</ResponsiveContainer>
+
+
 
 
 
@@ -768,7 +792,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               onClick={toggleInsights}
               className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg active:transform active:scale-95"
             >
-              Insights
+              Deep Dive
               {showInsights ? (
                 <ChevronUp className="w-4 h-4 transition-transform" />
               ) : (
