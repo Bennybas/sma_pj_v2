@@ -1,185 +1,178 @@
-import React, { useState } from 'react';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import React from "react";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
+import "./radialChart.css";
 
 const data = {
-  gender: [
-    { name: 'Male', value: 60 },
-    { name: 'Female', value: 40 },
+  Male: [
+    { name: "Type 1", value: 24, color: "#60A5FA" },
+    { name: "Type 2", value: 37, color: "#34D399" },
+    { name: "Type 3", value: 26, color: "#FBBF24" },
+    { name: "Type 4", value: 3, color: "#FB923C" },
+    { name: "Unknown", value: 11, color: "#C084FC" },
   ],
-  ageGroups: {
-    male: [
-      { name: 'Children', value: 50 },
-      { name: 'Teens', value: 30 },
-      { name: 'Adults', value: 20 },
-    ],
-    female: [
-      { name: 'Children', value: 40 },
-      { name: 'Teens', value: 35 },
-      { name: 'Adults', value: 25 },
-    ],
-  },
+  Female: [
+    { name: "Type 1", value: 24, color: "#60A5FA" },
+    { name: "Type 2", value: 37, color: "#34D399" },
+    { name: "Type 3", value: 26, color: "#FBBF24" },
+    { name: "Type 4", value: 3, color: "#FB923C" },
+    { name: "Unknown", value: 9, color: "#C084FC" },
+  ],
+  Children: [
+    { name: "Type 1", value: 45, color: "#60A5FA" },
+    { name: "Type 2", value: 28, color: "#34D399" },
+    { name: "Type 3", value: 11, color: "#FBBF24" },
+    { name: "Type 4", value: 1, color: "#FB923C" },
+    { name: "Unknown", value: 15, color: "#C084FC" },
+  ],
+  Teens: [
+    { name: "Type 1", value: 46, color: "#60A5FA" },
+    { name: "Type 2", value: 27, color: "#34D399" },
+    { name: "Type 3", value: 24, color: "#FBBF24" },
+    { name: "Type 4", value: 2, color: "#FB923C" },
+    { name: "Unknown", value: 1, color: "#C084FC" },
+  ],
+  Adults: [
+    { name: "Type 1", value: 9, color: "#60A5FA" },
+    { name: "Type 2", value: 44, color: "#34D399" },
+    { name: "Type 3", value: 38, color: "#FBBF24" },
+    { name: "Type 4", value: 5, color: "#FB923C" },
+    { name: "Unknown", value: 4, color: "#C084FC" },
+  ],
 };
 
-const COLORS = ['#0088FE', '#FF8042'];
-const AGE_COLORS = ['#83a6ed', '#8dd1e1', '#82ca9d'];
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="tooltip-label">{`${payload[0].name}: ${payload[0].value}%`}</p>
+      </div>
+    );
+  }
+  return null;
+};
 
-const DonutChartWithSubcharts = () => {
-  const [hoveredGender, setHoveredGender] = useState(null);
-  const [hoveredGenderIndex, setHoveredGenderIndex] = useState(null);
-
-  const calculateLinePosition = (angle, radius, cx, cy) => {
-    const radians = (angle - 90) * (Math.PI / 180);
-    return { 
-      x: cx + radius * Math.cos(radians),
-      y: cy + radius * Math.sin(radians) 
-    };
-  };
-
-  const calculateConnectorLine = (gender) => {
-    const centerX = 150;
-    const centerY = 150;
-    const outerRadius = 120;
-    const angle = gender === 'male' ? (360 * 60) / 100 : (360 * 40) / 100;
-    const linePosition = calculateLinePosition(angle / 2, outerRadius, centerX, centerY);
-    const targetX = gender === 'male' ? 125 : 275;
-    const targetY = gender === 'male' ? 125 : 275;
-
-    return { x1: linePosition.x, y1: linePosition.y, x2: targetX, y2: targetY };
-  };
-
+const DonutChart = ({ category, data }) => {
   return (
-    <div className="flex justify-center p-4">
-      {/* Main Chart (Centered) */}
-      <div className="relative flex-none self-center">
-        <h3 className="font-semibold text-lg mb-3 text-center">Gender Distribution</h3>
-        <PieChart width={300} height={300}>
+    <div className="donut-chart">
+      <ResponsiveContainer width={100} height={100}>
+        <PieChart>
           <Pie
-            data={data.gender}
-            cx={150}
-            cy={150}
-            innerRadius={60}
-            outerRadius={120}
-            fill="#8884d8"
-            paddingAngle={5}
+            data={data}
             dataKey="value"
-            onMouseLeave={() => {
-              setHoveredGender(null);
-              setHoveredGenderIndex(null);
-            }}
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            innerRadius={28}
+            outerRadius={40}
+            paddingAngle={3}
           >
-            {data.gender.map((entry, index) => {
-              const angle = (360 * entry.value) / 100;
-              const linePosition = calculateLinePosition(angle / 2, 120, 150, 150);
-              return (
-                <React.Fragment key={`fragment-${index}`}>
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                    onMouseEnter={() => {
-                      setHoveredGender(entry.name.toLowerCase());
-                      setHoveredGenderIndex(index);
-                    }}
-                  />
-                  {hoveredGenderIndex === index && (
-                    <line
-                      key={`line-${index}`}
-                      x1={150}
-                      y1={150}
-                      x2={linePosition.x}
-                      y2={linePosition.y}
-                      stroke={COLORS[index % COLORS.length]}
-                      strokeWidth="2"
-                    />
-                  )}
-                </React.Fragment>
-              );
-            })}
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
+            ))}
           </Pie>
-          <Tooltip />
-          <Legend />
+          <Tooltip content={<CustomTooltip />} />
         </PieChart>
-
-        {/* Connecting lines to Male and Female charts */}
-        {hoveredGender === 'male' && (
-          <line
-            x1={calculateConnectorLine('male').x1}
-            y1={calculateConnectorLine('male').y1}
-            x2={calculateConnectorLine('male').x2}
-            y2={calculateConnectorLine('male').y2}
-            stroke={COLORS[0]}
-            strokeWidth="2"
-          />
-        )}
-        {hoveredGender === 'female' && (
-          <line
-            x1={calculateConnectorLine('female').x1}
-            y1={calculateConnectorLine('female').y1}
-            x2={calculateConnectorLine('female').x2}
-            y2={calculateConnectorLine('female').y2}
-            stroke={COLORS[1]}
-            strokeWidth="2"
-          />
-        )}
-      </div>
-
-      {/* Right-Side Subcharts */}
-      <div className="flex flex-col justify-between gap-4">
-        {/* Male Age Distribution */}
-        <div
-          className={`transition-all duration-300 transform ${
-            hoveredGender === 'male' ? 'scale-105 shadow-lg' : 'opacity-75'
-          }`}
-        >
-          <h3 className="font-semibold text-lg mb-2 text-center">Male Age Distribution</h3>
-          <PieChart width={200} height={200}>
-            <Pie
-              data={data.ageGroups.male}
-              cx={100}
-              cy={100}
-              innerRadius={30}
-              outerRadius={60}
-              fill="#8884d8"
-              paddingAngle={5}
-              dataKey="value"
-            >
-              {data.ageGroups.male.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={AGE_COLORS[index % AGE_COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </div>
-
-        {/* Female Age Distribution */}
-        <div
-          className={`transition-all duration-300 transform ${
-            hoveredGender === 'female' ? 'scale-105 shadow-lg' : 'opacity-200'
-          }`}
-        >
-          <h3 className="font-semibold text-lg mb-2 text-center">Female Age Distribution</h3>
-          <PieChart width={200} height={200}>
-            <Pie
-              data={data.ageGroups.female}
-              cx={100}
-              cy={100}
-              innerRadius={30}
-              outerRadius={60}
-              fill="#8884d8"
-              paddingAngle={5}
-              dataKey="value"
-            >
-              {data.ageGroups.female.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={AGE_COLORS[index % AGE_COLORS.length]} />
-              ))}
-            </Pie>
-            <Tooltip />
-            <Legend />
-          </PieChart>
-        </div>
-      </div>
+      </ResponsiveContainer>
     </div>
   );
 };
 
-export default DonutChartWithSubcharts;
+const RadialChart = () => {
+  const radius = 35;
+  const startAngle = -Math.PI / 2; // Start from top
+  const angleStep = (2 * Math.PI) / 5;
+
+  const positions = [
+    { category: "Adults", angle: startAngle },
+    { category: "Teens", angle: startAngle + angleStep },
+    { category: "Children", angle: startAngle + 2 * angleStep },
+    { category: "Female", angle: startAngle + 3 * angleStep },
+    { category: "Male", angle: startAngle + 4 * angleStep },
+  ].map(({ category, angle }) => ({
+    category,
+    x: 50 + radius * Math.cos(angle) + "%",
+    y: 50 + radius * Math.sin(angle) + "%",
+  }));
+
+  return (
+    <Card className="radial-chart-container">
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold text-slate-800">
+          Staging Completion Rate Analysis
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="radial-chart-wrapper">
+          <div className="central-node">
+            <span>Staging Completion Rate</span>
+          </div>
+
+          <svg className="connecting-areas" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <radialGradient id="area-gradient" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#C084FC" stopOpacity="0.05" />
+              </radialGradient>
+            </defs>
+            {positions.map((pos, index) => {
+              const nextPos = positions[(index + 1) % positions.length];
+              const centerX = 50;
+              const centerY = 50;
+              const x1 = parseFloat(pos.x);
+              const y1 = parseFloat(pos.y);
+              const x2 = parseFloat(nextPos.x);
+              const y2 = parseFloat(nextPos.y);
+
+              const path = `
+                M ${centerX} ${centerY}
+                L ${x1} ${y1}
+                A ${radius} ${radius} 0 0 1 ${x2} ${y2}
+                Z
+              `;
+
+              return (
+                <path
+                  key={index}
+                  d={path}
+                  fill="url(#area-gradient)"
+                  className="connecting-area"
+                />
+              );
+            })}
+          </svg>
+
+          {positions.map((pos) => (
+            <div
+              key={pos.category}
+              className="chart-node"
+              style={{
+                left: pos.x,
+                top: pos.y,
+              }}
+            >
+              <div className="node-content">
+                <DonutChart category={pos.category} data={data[pos.category]} />
+                <div className="node-label">{pos.category}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="chart-legend">
+          {data.Male.map((item, index) => (
+            <div key={index} className="legend-item">
+              <div
+                className="legend-color"
+                style={{ backgroundColor: item.color }}
+              />
+              <span className="legend-label">{item.name}</span>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default RadialChart;

@@ -1,0 +1,97 @@
+.radial-chart-container {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  background: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(248, 250, 252));
+  border: none;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.radial-chart-wrapper {
+  position: relative;
+  height: 440px;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.central-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgb(241 245 249), rgb(248 250 252));
+  border: 2px solid rgb(226 232 240);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.connecting-areas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.connecting-area {
+  fill: rgba(96, 165, 250, 0.2); /* Light blue fill */
+  stroke: #60A5FA;  /* Blue border */
+  stroke-width: 1; /* Add a slight border */
+  transition: fill 0.3s ease; /* Smooth transition on hover */
+}
+
+.chart-node {
+  position: absolute;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.node-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.node-label {
+  margin-top: 0.5rem;
+  font-size: 14px;
+  color: rgb(55 65 81);
+}
+
+.donut-chart {
+  width: 100px;
+  height: 100px;
+}
+
+.chart-legend {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.legend-label {
+  font-size: 14px;
+  color: rgb(75 85 99);
+  color: #C084FC;
+}

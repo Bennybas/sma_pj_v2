@@ -4,13 +4,13 @@ import SankeyDiagram from '../sankey/sankeyDiag';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer, ComposedChart, 
-  Sankey
+  Sankey,RadialBarChart,RadialBar
 } from 'recharts';
 import {
   ArrowRight, Stethoscope, Building2, User, LineChart as LineChartIcon,
   ClipboardCheck, AlertTriangle, ChevronDown, ChevronUp
 } from 'lucide-react';
-import DonutChartWithSubcharts from '../donut/donutchart';
+import RadialChart from '../donut/donutchart';
 
 const JourneyStage = ({ stage, metrics, barriers, findings }) => {
   const [hoveredAction, setHoveredAction] = useState(null);
@@ -108,12 +108,24 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { year: '2022', 'Type 3': 27, 'Type 4': 3 },
           { year: '2023', 'Type 3': 27, 'Type 4': 4 }
         ];
+        const distanceAccessData = [
+          { distance: '<=50Km', value: 73.77, fill: '#82ca9d' }, // Green
+          { distance: '>50Km', value: 26.23, fill: '#8884d8' }  // Blue
+        ];
+        const waitTimeData = [
+          { category: "Children (2-12 years)", "<= 2 weeks": 11.5, "> 2 weeks": 88.5 },
+          { category: "Adolescents (13-17 years)", "<= 2 weeks": 0.0, "> 2 weeks": 100.0 },
+        ];
+        
+        
         return {
           type: 'bar',
           motorFunctionData: motorFunctionData,
           Screeningdata:Screeningdata,
           SMN2:SMN2,
           lineData: smaTrendsData,
+          distanceAccessData:distanceAccessData,
+          waitTimeData:waitTimeData,
           
         };
     
@@ -141,19 +153,51 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { name: 'Coverage Denied', value: 22 },
           { name: 'Appeal Pending', value: 4 },
         ];
-        const Breathingdata = [
-          { name: 'Supplemental Oxygen', value: 16 },
-          { name: 'BPAP', value: 66 },
-          { name: 'CPAP', value: 15 },
-          { name: 'Ventilator', value: 21 }
+        const breathingData = [
+          { name: 'BPAP', value: 66, fill: '#8884d8' },
+          { name: 'Ventilator', value: 21, fill: '#83a6ed' },
+          { name: 'Supplemental Oxygen', value: 16, fill: '#8dd1e1' },
+          { name: 'CPAP', value: 15, fill: '#82ca9d' }
+        ].sort((a, b) => b.value - a.value);
+
+        const feedingData = [
+          { name: 'Unrestricted Oral Diet', value: 60, fill: '#ff8042' },
+          { name: 'Oral Diet (Special)', value: 19, fill: '#ffc658' },
+          { name: 'Feeding Tube + Oral', value: 14, fill: '#a4de6c' },
+          { name: 'Tube-Dependent', value: 7, fill: '#d0ed57' }
+        ].sort((a, b) => b.value - a.value);
+
+
+        const mortality = [
+          { year: 2013, value: 2.36 },
+          { year: 2014, value: 1.75 },
+          { year: 2015, value: 1.5 },
+          { year: 2016, value: 1.85 },
+          { year: 2017, value: 1 },
+          { year: 2018, value: 0.85 },
+          { year: 2019, value: 0.75 },
+          { year: 2020, value: 0.9 },
+          { year: 2021, value: 0.75 },
+          { year: 2022, value: 0.75 },
+          { year: 2023, value: 0.75 }
         ];
+        const hospitalizationData = [
+          { year: 2021, pediatrics: 6, adults: 19 },
+          { year: 2022, pediatrics: 9, adults: 21 },
+          { year: 2023, pediatrics: 9, adults: 25 }
+        ];
+        
+        
         return {
           type: 'pie',
           treatmentData: treatdata,
           treatmentData1: treatmentData1,
           insuranceData:insuranceData,
-          Breathingdata:Breathingdata,
-          title: 'Treatment Effectiveness (%)'
+          breathingData:breathingData,
+          feedingData:feedingData,
+          mortality:mortality,
+          hospitalizationData:hospitalizationData,
+         
         };
       }
       default:
@@ -165,7 +209,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     const chartConfig = getChartData();
     if (!chartConfig) return null;
 
-    const { type, title, lineData, SMN2,treatmentData, treatmentData1, insuranceData,smaDistributionData,Breathingdata,Screeningdata } = chartConfig;
+    const { type, title, lineData, SMN2,distanceAccessData, treatmentData1, insuranceData,feedingData,breathingData,Screeningdata,mortality,hospitalizationData,waitTimeData } = chartConfig;
 
     switch (type) {
       case 'line':
@@ -210,9 +254,27 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
         return (
           <div className="w-full space-y-6">
             <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-3 gap-8">
             <Card className="p-6">
-            <DonutChartWithSubcharts />
+            {/* <RadialChart /> */}
+            <h4 className="text-sm font-medium text-gray-700 mb-6">Wait Time to Specialist Consultation</h4>
+            <div className="aspect-[4/3] w-full">
+            <ResponsiveContainer width="105%" height="105%">
+                <BarChart
+                  data={waitTimeData}
+                  margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="category" />
+                  <YAxis />
+                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Legend />
+                  <Bar dataKey="<= 2 weeks" fill="#82ca9d" name="<= 2 weeks" />
+                  <Bar dataKey="> 2 weeks" fill="#8884d8" name="> 2 weeks" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
             </Card>
 
 
@@ -238,12 +300,56 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             </Card>
 
 
+            <Card className="p-6">
+              <h4 className="text-sm font-medium text-gray-700 mb-6">Testing Facility Availability Rate (%)</h4>
+              <div className="aspect-[4/3] w-full">
+
+              <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={distanceAccessData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="60%"
+                      outerRadius="80%"
+                      paddingAngle={5}
+                      dataKey="value" // This key is for the chart's data
+                    >
+                      {distanceAccessData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      formatter={(value) => `${value}%`}
+                      contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
+                    />
+                    {/* Adjusted Legend */}
+                    <Legend
+                      layout="horizontal"
+                      align="center"
+                      verticalAlign="bottom"
+                      wrapperStyle={{ fontSize: '12px', marginTop: '20px' }}
+                      payload={
+                        distanceAccessData.map((item) => ({
+                          value: item.distance, // Use 'distance' for legend labels
+                          type: 'square',      // Use 'square' shape for legend indicators
+                          color: item.fill     // Use corresponding fill color
+                        }))
+                      }
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+
+              </div>
+            </Card>
+
+
 
             </div>
            
             <div className="grid grid-cols-2 gap-8">
               <Card className="p-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">Insurance Coverage Status</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-6">Diagnosed Via Screening</h4>
                 <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -330,56 +436,10 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           return (
             <div className="w-full space-y-8">
               <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-              <div className="grid grid-cols-2 gap-8">
-                {/* Treatment Effectiveness Pie Chart */}
-                <Card className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Factor Comparison</h4>
-                  <div className="aspect-[4/3] w-full">
-                    <ResponsiveContainer width="90%" height="90%">
-                      <BarChart data={treatmentData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="Newborn Screened" stackId="a" fill="#8884d8" />
-                        <Bar dataKey="Teens" stackId="a" fill="#82ca9d" />
-                        <Bar dataKey="Adults" stackId="a" fill="#ffc658" />
-                        <Bar dataKey="Newborn Screened (Other)" stackId="a" fill="#d0ed57" />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </Card>
-  
-                {/* Time to Treatment Trend Line Chart */}
-                <Card className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Time to Treatment Trend</h4>
-                  <div className="aspect-[4/3] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart 
-                        data={treatmentData1}
-                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-                      >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="year" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line 
-                          type="monotone" 
-                          dataKey="value" 
-                          stroke="#8884d8"
-                          name="Days to Treatment"
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </Card>
-              </div>
-  
-              <div className="grid grid-cols-2 gap-8">
-              <Card className="p-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">Insurance Coverage Status</h4>
+              
+              <div className="grid grid-cols-3 gap-8">
+              <div className="p-4">
+                <h4 className="text-sm text-align-centre font-medium text-gray-700 mb-6">Insurance Coverage Status</h4>
                 <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -407,41 +467,207 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-              </Card>
+              </div>
 
-              <Card className="p-6">
+              <div className="p-4">
                 <h4 className="text-sm font-medium text-gray-700 mb-6">Breathing Support Type Percentage</h4>
                 <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={Breathingdata}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={true}
-                        label={({ name, value }) => `${name}: ${value}%`}
-                        outerRadius={100}
-                        fill="#8884d8"
+                  <RadialBarChart
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="30%"
+                      outerRadius="100%"
+                      data={breathingData}
+                      startAngle={180}
+                      endAngle={-180}
+                    >
+                      <RadialBar
+                        minAngle={15}
+                        background
+                        clockWise={true}
                         dataKey="value"
-                      >
-                        {insuranceData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <Tooltip />
-                      <Legend 
-                        layout="horizontal" 
-                        align="center" 
-                        verticalAlign="bottom"
-                        wrapperStyle={{ paddingTop: '20px' }}
+                        cornerRadius={5}
+                        label={{ fill: '#666', position: 'insideStart' }}
                       />
-                    </PieChart>
+                      <Tooltip
+                        formatter={(value) => `${value}%`}
+                        contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
+                      />
+                      <Legend
+                          layout="horizontal"  // Change the layout to horizontal
+                          align="center"       // Center the legend
+                          verticalAlign="bottom" // Place the legend at the bottom of the chart
+                          wrapperStyle={{ fontSize: '12px', marginTop: '20px' }} // Add margin for spacing
+                        />
+                    </RadialBarChart>
                   </ResponsiveContainer>
                 </div>
-              </Card>
+              </div>
+
+
+              <div className="p-4">
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Nutritional Feeding Support Type Percentage</h4>
+                  <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                      <PieChart>
+                        <Pie
+                          data={feedingData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius="60%"
+                          outerRadius="80%"
+                          paddingAngle={5}
+                          dataKey="value"
+                        >
+                          {feedingData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.fill} />
+                          ))}
+                        </Pie>
+                        <Tooltip
+                          formatter={(value) => `${value}%`}
+                          contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
+                        />
+                        {/* Adjusted Legend */}
+                        <Legend
+                          layout="horizontal"  // Change the layout to horizontal
+                          align="center"       // Center the legend
+                          verticalAlign="bottom" // Place the legend at the bottom of the chart
+                          wrapperStyle={{ fontSize: '12px', marginTop: '20px' }} // Add margin for spacing
+                        />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+              </div>
+
+
+              
+
+
+
 
               
               </div>
+
+
+              <div className="grid grid-cols-3 gap-8">
+                {/* Treatment Effectiveness Pie Chart */}
+                <div className="p-6">
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Factor Comparison</h4>
+                  <div className="aspect-[4/3] w-full">
+                    {/* <ResponsiveContainer width="90%" height="90%">
+                      <BarChart data={treatmentData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Bar dataKey="Newborn Screened" stackId="a" fill="#8884d8" />
+                        <Bar dataKey="Teens" stackId="a" fill="#82ca9d" />
+                        <Bar dataKey="Adults" stackId="a" fill="#ffc658" />
+                        <Bar dataKey="Newborn Screened (Other)" stackId="a" fill="#d0ed57" />
+                      </BarChart>
+                    </ResponsiveContainer> */}
+
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart 
+                          data={hospitalizationData} 
+                          margin={{ top: 30, right: 30, left: 20, bottom: 5 }}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="year" />
+                          <YAxis 
+                            domain={[0, 35]} 
+                            tickFormatter={(value) => `${value}%`}
+                          />
+                          <Tooltip formatter={(value) => `${value}%`} />
+                          <Legend />
+                          <Line
+                            type="monotone"
+                            dataKey="pediatrics"
+                            stroke="#ffc658"
+                            strokeWidth={2}
+                            dot={{ r: 4 }}
+                            label={{
+                              position: 'top',
+                              fill: '#ffc658',
+                              fontSize: 12,
+                              formatter: (value) => `${value}%`
+                            }}
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="adults"
+                            stroke="#ff7300"
+                            strokeWidth={2}
+                            dot={{ r: 4 }}
+                            label={{
+                              position: 'top',
+                              fill: '#ff7300',
+                              fontSize: 12,
+                              formatter: (value) => `${value}%`
+                            }}
+                          />
+                        </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+  
+                {/* Time to Treatment Trend Line Chart */}
+                <div className="p-6">
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Time between Diagnosis and First SMA Treatment</h4>
+                  <div className="aspect-[4/3] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart 
+                        data={treatmentData1}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="year" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line 
+                          type="monotone" 
+                          dataKey="value" 
+                          stroke="#8884d8"
+                          name="Days to Treatment"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+
+
+
+                <div className="p-6">
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Mortality Rate</h4>
+                  <div className="aspect-[4/3] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <LineChart 
+                        data={mortality}
+                        margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                      >
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="year" />
+                        <YAxis />
+                        <Tooltip />
+                        <Legend />
+                        <Line 
+                          type="monotone" 
+                          dataKey="value" 
+                          stroke="#8884d8"
+                          name="Days to Treatment"
+                        />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+
+
+
+              </div>
+  
 
 
               
