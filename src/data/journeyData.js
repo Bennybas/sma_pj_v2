@@ -54,7 +54,7 @@ export const journeyData = [
 
     metrics:[
 
-      { value: "88%", label: "High Specialist Utilization" },
+      { value: "88%", label: "High Neurologist Utilization" },
 
       { value: "5.8 specialists", label: "Average Number of Specialists" },
 
@@ -360,7 +360,7 @@ export const journeyData = [
 
     title: "Treatment Initiation and Monitoring Outcomes",
 
-    description: "Long-term treatment, monitoring, and management of Alzheimer's disease and other Dementias.",
+    description: "Long-term treatment, monitoring, and management of SMA disease",
 
     actions: [
 
