@@ -887,7 +887,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           <Card className="h-full p-5 bg-gradient-to-b from-blue-50 to-blue-100 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
             <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
               <LineChartIcon className="w-4 h-4" />
-              Key Metrics
+              Impact Measures
             </h3>
             <div className="space-y-3">
               {metrics.map((metric, idx) => (
@@ -927,7 +927,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           <Card className="h-full p-5 bg-gradient-to-b from-purple-50 to-purple-100 shadow-lg rounded-lg hover:shadow-xl transition-shadow">
             <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
               <ClipboardCheck className="w-4 h-4" />
-              Key Opportunities
+              Emerging Prospects
             </h3>
             <div className="space-y-3">
               {findings.map((finding, idx) => (
