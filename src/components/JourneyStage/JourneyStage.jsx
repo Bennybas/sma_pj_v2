@@ -177,9 +177,6 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { name: 'Not/Minimally Effective', percentage: 19 },
           { name: 'Moderately Effective', percentage: 37 },
           { name: 'Effective/Very Effective', percentage: 44 },
-          { name: 'Uncomfortable', percentage: 19 },
-          { name: 'Neutral', percentage: 24 },
-          { name: 'Comfortable', percentage: 57 },
         ];
         
         
@@ -567,16 +564,12 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                 <div className="aspect-[4/3] w-full" >
                 <ResponsiveContainer width="100%" height="110%">
                     <BarChart layout="vertical" data={insuranceData1}>
-                      {/* <CartesianGrid strokeDasharray="3 3" /> */}
                       
-                      {/* Y-Axis: Use 'type' field for categories */}
                       <YAxis dataKey="type" type="category" width={90} />
                       
                       <XAxis type="number" />
                       <Tooltip formatter={(value) => `${value}%`} />
-                      {/* <Legend /> */}
-
-                      {/* Single Bar for each Insurance Type */}
+                      
                       <Bar dataKey="value" fill="#8884d8" />
                     </BarChart>
                   </ResponsiveContainer>
@@ -776,7 +769,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                     <Tooltip />
                     <Legend />
                     <CartesianGrid strokeDasharray="3 3" />
-                    <Bar dataKey="percentage" fill="#8884d8" />
+                    <Bar dataKey="percentage" fill="#8884d8" name=""/>
                   </BarChart>
                   </ResponsiveContainer>
                 </div>

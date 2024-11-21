@@ -32,8 +32,6 @@ const StateScreeningMap = () => {
     SD: 'Yes', TN: 'Yes', TX: 'Yes', UT: 'No', VT: 'Yes',
     VA: 'Yes', WA: 'Yes', WV: 'Yes', WI: 'Yes', WY: 'No',
     DC: 'Yes', 
-    AS: 'Unknown', GU: 'Unknown', MP: 'Unknown', 
-    PR: 'Unknown', UM: 'Unknown', VI: 'Unknown'
   };
 
   const getStateColor = (stateId) => {
@@ -42,7 +40,7 @@ const StateScreeningMap = () => {
 
     return stateScreening[stateCode] === 'Yes' ? '#90EEB1' :
            stateScreening[stateCode] === 'No'  ? '#FEB2B2' :
-           stateScreening[stateCode] === 'Unknown' ? '#FAF089' :
+           
            '#F0F4F8';
   };
 
@@ -52,13 +50,12 @@ const StateScreeningMap = () => {
 
     return stateScreening[stateCode] === 'Yes' ? '#48BB78' :
            stateScreening[stateCode] === 'No'  ? '#F56565' :
-           stateScreening[stateCode] === 'Unknown' ? '#ECC94B' :
            '#CBD5E0';
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
-      <h2 className="text-2xl font-bold text-center mb-4">State Screening Status</h2>
+      <h2 className="text-2xl font-bold text-center mb-4"> Screening Coverage by State</h2>
       <div className="flex justify-center items-center space-x-4 mb-4">
         <div className="flex items-center">
           <div className="w-4 h-4 bg-[#90EEB1] mr-2"></div>
@@ -67,10 +64,6 @@ const StateScreeningMap = () => {
         <div className="flex items-center">
           <div className="w-4 h-4 bg-[#FEB2B2] mr-2"></div>
           <span>Screening: No</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-4 h-4 bg-[#FAF089] mr-2"></div>
-          <span>Unknown</span>
         </div>
       </div>
       <ComposableMap projection="geoAlbersUsa" className="w-full h-[500px]">
