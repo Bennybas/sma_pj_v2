@@ -34,6 +34,17 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
   const getChartData = () => {
     switch (stage.number) {
       case 1: {
+        const motorFunctionData = [
+          { name: 'Male', Type3: 26, Type4: 3 },
+          { name: 'Female', Type3: 26, Type4: 3 },
+          { name: 'Children', Type3: 11, Type4: 1 },
+          { name: 'Teens', Type3: 24, Type4: 2 },
+          { name: 'Adults', Type3: 38, Type4: 5 },
+        ];
+        return {
+          type: 'line',
+          motorFunctionData:motorFunctionData
+        };
       }
       case 2: {
         // Transform motor function data for visualization
@@ -560,7 +571,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
 
               <div className="p-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">Types of Insurance Among Pediatrics and Adults with SMA</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-6">Types of Insurance Among Patients with SMA</h4>
                 <div className="aspect-[4/3] w-full" >
                 <ResponsiveContainer width="100%" height="110%">
                     <BarChart layout="vertical" data={insuranceData1}>
@@ -760,7 +771,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                 </div>
 
                 <div className="p-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">SMA impact on their lives</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-6">Effectiveness of TeleMedicine</h4>
                 <div className="aspect-[4/3] w-full">
                 <ResponsiveContainer width="90%" height={400}>
                   <BarChart data={teledata}>
