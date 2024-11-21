@@ -7,7 +7,8 @@ import {
 } from 'recharts';
 import {
   ArrowRight, Stethoscope, Building2, User, LineChart as LineChartIcon,
-  ClipboardCheck, AlertTriangle, ChevronDown, ChevronUp
+  ClipboardCheck, AlertTriangle, ChevronDown, ChevronUp,
+  Bold
 } from 'lucide-react';
 import StateScreeningMap from '../usa/USAstate.jsx';
 
@@ -105,7 +106,16 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { year: '2021 (n=93)', age: 5.5 },
           { year: '2022 (n=46)', age: 4.0 },
           { year: '2023 (n=25)', age: 8.1 },
-        ];      
+        ];  
+        
+        const racedata =[
+          { name: 'Non-Hispanic White', 'Cure SMA Data': 70, 'SMA Model': 69 },
+          { name: 'Hispanic or Latino', 'Cure SMA Data': 17, 'SMA Model': 17 },
+          { name: 'Asian, Native Hawaiian, or Other Pacific Islander', 'Cure SMA Data': 5, 'SMA Model': 5 },
+          { name: 'Black or African American', 'Cure SMA Data': 5, 'SMA Model': 8 },
+          { name: 'American Indian or Alaska Native', 'Cure SMA Data': 0.6, 'SMA Model': 0.6 },
+          { name: 'Other or Unknown', 'Cure SMA Data': 0, 'SMA Model': 6 }
+        ];
       
         
         return {
@@ -118,7 +128,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           waitTimeData:waitTimeData,
           bubbledata:bubbledata,
           smaDistributionData:smaDistributionData,
-          notscreendata:notscreendata
+          notscreendata:notscreendata,
+          racedata:racedata
           
         };
     
@@ -204,22 +215,19 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             year: '2021',
             pediatricPercent: 6,
             adultPercent: 19,
-            pediatricAvg: 2.4,
-            adultAvg: 2.2,
+            
           },
           {
             year: '2022',
             pediatricPercent: 9,
             adultPercent: 21,
-            pediatricAvg: 2,
-            adultAvg: 2.2,
+            
           },
           {
             year: '2023',
             pediatricPercent: 9,
             adultPercent: 25,
-            pediatricAvg: 1.6,
-            adultAvg: 1.6,
+           
           },
         ];
         
@@ -251,7 +259,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     const chartConfig = getChartData();
     if (!chartConfig) return null;
 
-    const { type, title,breathingData, notscreendata,lineData,smaDistributionData, SMN2,distanceAccessData, treatmentData1, insuranceData1,insuranceData,SMA_Treatments,Screeningdata,mortality,hospitalisationdata,waitTimeData,impactData,teledata } = chartConfig;
+    const { type, title,breathingData,racedata, notscreendata,lineData,smaDistributionData, SMN2,distanceAccessData, treatmentData1, insuranceData1,insuranceData,SMA_Treatments,Screeningdata,mortality,hospitalisationdata,waitTimeData,impactData,teledata } = chartConfig;
 
     switch (type) {
       case 'line':
@@ -553,7 +561,30 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   </div>
                   
                 </div>
+
+
+                <div className="p-4">
+                  <h4 className="text-sm font-medium text-gray-700 mb-4">
+                  RaceEthnicityCategories
+                  </h4>
+                  <div className="h-[400px] -ml-20 mr-7">
+                  <ResponsiveContainer width="100%" height="100%">
+                  <BarChart width={600} height={400} data={racedata}>
+                    <XAxis dataKey="name" tick={{ fontSize: 12, fontWeight:Bold }}  />
+                    <YAxis />
+                    <CartesianGrid />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Cure SMA Data" fill="#8884d8" />
+                    <Bar dataKey="SMA Model" fill="#82ca9d" />
+                  </BarChart>
+                  </ResponsiveContainer>
+              </div>
+              
+              </div>
               </div> 
+              
+              
 
 
               <div className="grid grid-cols-1 gap-8">
@@ -728,8 +759,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                             <YAxis yAxisId="right" orientation="right" label={{ value: 'Average Hospitalizations', angle: 90, position: 'insideRight' }} />
                             <Tooltip />
                             <Legend />
-                            <Bar yAxisId="right" dataKey="pediatricAvg" fill="#90cdf4" name="Avg. Hospitalizations (Pediatric)" />
-                            <Bar yAxisId="right" dataKey="adultAvg" fill="#b794f4" name="Avg. Hospitalizations (Adult)" />
+                            <Bar yAxisId="right" dataKey="pediatricPercent" fill="#90cdf4" name="Pediatric" />
+                            <Bar yAxisId="right" dataKey="adultPercent" fill="#b794f4" name="Adult" />
                             <Line yAxisId="left" type="monotone" dataKey="pediatricPercent" stroke="#63b3ed" name="Percent Hospitalized (Pediatric)" />
                             <Line yAxisId="left" type="monotone" dataKey="adultPercent" stroke="#805ad5" name="Percent Hospitalized (Adult)" />
                           </BarChart>
