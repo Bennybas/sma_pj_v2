@@ -330,37 +330,37 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               <div className="aspect-[4/3] w-full">
 
               <ResponsiveContainer width="100%" height="100%">
-  <PieChart>
-    <Pie
-      data={distanceAccessData}
-      cx="50%"
-      cy="50%"
-      innerRadius="60%"
-      outerRadius="80%"
-      paddingAngle={5}
-      dataKey="value"
-    >
-      {distanceAccessData.map((entry, index) => (
-        <Cell key={`cell-${index}`} fill={entry.fill} />
-      ))}
-    </Pie>
-    <Tooltip
-      formatter={(value) => `${value}%`}  // Display only percentage value
-      contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
-    />
-    <Legend
-      layout="horizontal"
-      align="center"
-      verticalAlign="bottom"
-      wrapperStyle={{ fontSize: '12px', marginTop: '20px' }}
-      payload={distanceAccessData.map((item) => ({
-        value: item.distance, // Show 'distance' in legend
-        type: 'square',      // Use square shape for legend
-        color: item.fill     // Use corresponding color for the legend
-      }))}
-    />
-  </PieChart>
-</ResponsiveContainer>
+                      <PieChart>
+                        <Pie
+                          data={distanceAccessData}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius="60%"
+                          outerRadius="80%"
+                          paddingAngle={5}
+                          dataKey="value" // Correct data key for percentages
+                          nameKey="distance" // Add the name key for tooltips and legends
+                        >
+                          {distanceAccessData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.fill} />
+                          ))}
+                        </Pie>
+
+                        {/* Tooltip to display the correct percentage and treatment */}
+                        <Tooltip
+                          formatter={(value, _, props) => `${value}%`}
+                          contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
+                        />
+
+                        {/* Adjusted Legend */}
+                        <Legend
+                          layout="horizontal"
+                          align="center"
+                          verticalAlign="bottom"
+                          formatter={(value, entry) => entry.payload.distanceAccessData}
+                        />
+                      </PieChart>
+                    </ResponsiveContainer>
 
 
 
@@ -595,34 +595,39 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                   <h4 className="text-sm font-medium text-gray-700 mb-6">USE OF MULTIPLE TREATMENTS</h4>
                   <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
-  <PieChart>
-    <Pie
-      data={SMA_Treatments}
-      cx="50%"
-      cy="50%"
-      innerRadius="60%"
-      outerRadius="80%"
-      paddingAngle={5}
-      dataKey="Percentage"
-    >
-      {SMA_Treatments.map((entry, index) => (
-        <Cell key={`cell-${index}`} fill={entry.fill} />
-      ))}
-    </Pie>
-    
-    {/* Adjusted Legend */}
-    <Legend
-      layout="horizontal"  // Horizontal layout for legend
-      align="center"       // Center the legend
-      verticalAlign="bottom" // Place the legend at the bottom of the chart
-      formatter={(value, entry) => {
-        // Display the corresponding name for each treatment
-        const treatment = SMA_Treatments.find(item => item.Percentage === entry.payload.Percentage);
-        return treatment ? treatment.SMA_Treatments : value;
-      }}
-    />
-  </PieChart>
-</ResponsiveContainer>
+                      <PieChart>
+                        <Pie
+                          data={SMA_Treatments}
+                          cx="50%"
+                          cy="50%"
+                          innerRadius="60%"
+                          outerRadius="80%"
+                          paddingAngle={5}
+                          dataKey="Percentage" // Correct data key for percentages
+                          nameKey="SMA_Treatments" // Add the name key for tooltips and legends
+                        >
+                          {SMA_Treatments.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.fill} />
+                          ))}
+                        </Pie>
+
+                        {/* Tooltip to display the correct percentage and treatment */}
+                        <Tooltip
+                          formatter={(value, _, props) => `${value}%`}
+                          contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
+                        />
+
+                        {/* Adjusted Legend */}
+                        <Legend
+                          layout="horizontal"
+                          align="center"
+                          verticalAlign="bottom"
+                          formatter={(value, entry) => entry.payload.SMA_Treatments}
+                        />
+                      </PieChart>
+                    </ResponsiveContainer>
+
+
 
 
 
