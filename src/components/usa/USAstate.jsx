@@ -36,17 +36,26 @@ const StateScreeningMap = () => {
 
   const getStateColor = (stateId) => {
     const stateCode = Object.keys(stateMapping).find(key => stateMapping[key] === stateId);
-    if (!stateCode) return '#F0F4F8'; // Light gray if no match
+    if (!stateCode) return '#F0F4F8'; 
 
     return stateScreening[stateCode] === 'Yes' ? '#90EEB1' :
            stateScreening[stateCode] === 'No'  ? '#FEB2B2' :
            
            '#F0F4F8';
   };
+  const getStatename = (stateId) => {
+    const stateCode = Object.keys(stateMapping).find(key => stateMapping[key] === stateId);
+    if (!stateCode) return '#F0F4F8'; 
+
+    return stateScreening[stateCode] === 'Yes' ? stateCode :
+           stateScreening[stateCode] === 'No'  ? stateCode :
+           
+           '#F0F4F8';
+  };
 
   const getHoverColor = (stateId) => {
     const stateCode = Object.keys(stateMapping).find(key => stateMapping[key] === stateId);
-    if (!stateCode) return '#CBD5E0'; // Slightly darker gray
+    if (!stateCode) return '#CBD5E0';
 
     return stateScreening[stateCode] === 'Yes' ? '#48BB78' :
            stateScreening[stateCode] === 'No'  ? '#F56565' :
@@ -70,12 +79,12 @@ const StateScreeningMap = () => {
         <Geographies geography={geoUrl}>
           {({ geographies }) =>
             geographies.map(geo => {
-              const stateId = geo.id;  // Use GeoJSON id
+              const stateId = geo.id;  
               const stateCode = Object.keys(stateMapping).find(key => stateMapping[key] === stateId);
               const stateColor = getStateColor(stateId);
               const hoverColor = getHoverColor(stateId);
               const centroid = geo.properties.centroid || [0, 0];
-              const stateName = geo.properties.name;
+              const stateName = getStatename(stateId)
 
               return (
                 <Geography
@@ -85,9 +94,9 @@ const StateScreeningMap = () => {
                   stroke="#FFFFFF"
                   strokeWidth={0.5}
                   style={{
-                    default: { outline: "none" },
-                    hover: { fill: hoverColor, outline: "none" },
-                    pressed: { fill: hoverColor, outline: "none" }
+                    default: { outline: stateName },
+                    hover: { fill: hoverColor, outline: stateName },
+                    pressed: { fill: hoverColor, outline: stateName }
                   }}
                 >
                   {stateCode && (

@@ -3,7 +3,7 @@ import { Card } from '../ui/card';
 import SankeyDiagram from '../sankey/sankeyDiag';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer
+  LineChart, Line, PieChart, Pie, Cell, ResponsiveContainer,RadialBarChart, RadialBar,
 } from 'recharts';
 import {
   ArrowRight, Stethoscope, Building2, User, LineChart as LineChartIcon,
@@ -96,7 +96,16 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { category: "Pediatric Neurologist", percentage: 83 },
           { category: "Occupational Therapist", percentage: 64 },
           { category: "Nutritionist", percentage: 58 },
-        ];        
+        ];  
+        const notscreendata =[
+          { year: '2017 (n=188)', age: 5.7 },
+          { year: '2018 (n=183)', age: 5.0 },
+          { year: '2019 (n=188)', age: 7.0 },
+          { year: '2020 (n=110)', age: 6.0 },
+          { year: '2021 (n=93)', age: 5.5 },
+          { year: '2022 (n=46)', age: 4.0 },
+          { year: '2023 (n=25)', age: 8.1 },
+        ];      
       
         
         return {
@@ -108,7 +117,8 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           distanceAccessData:distanceAccessData,
           waitTimeData:waitTimeData,
           bubbledata:bubbledata,
-          smaDistributionData:smaDistributionData
+          smaDistributionData:smaDistributionData,
+          notscreendata:notscreendata
           
         };
     
@@ -141,15 +151,15 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { type: "Medicare", value: 24.5 },
           { type: "Commercial", value: 58 }
         ];
+       
         
         
-        
-        // const breathingData = [
-        //   { name: 'BPAP', value: 66, fill: '#8884d8' },
-        //   { name: 'Ventilator', value: 21, fill: '#83a6ed' },
-        //   { name: 'Supplemental Oxygen', value: 16, fill: '#8dd1e1' },
-        //   { name: 'CPAP', value: 15, fill: '#82ca9d' }
-        // ].sort((a, b) => b.value - a.value);
+        const breathingData = [
+          { name: 'BPAP', value: 66, fill: '#8884d8' },
+          { name: 'Ventilator', value: 21, fill: '#83a6ed' },
+          { name: 'Supplemental Oxygen', value: 16, fill: '#8dd1e1' },
+          { name: 'CPAP', value: 15, fill: '#82ca9d' }
+        ].sort((a, b) => b.value - a.value);
 
         const SMA_Treatments = [
           
@@ -173,11 +183,11 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { year: 2022, value: 0.75 },
           { year: 2023, value: 0.75 }
         ];
-        const hospitalizationData = [
-          { year: 2021, pediatrics: 6, adults: 19 },
-          { year: 2022, pediatrics: 9, adults: 21 },
-          { year: 2023, pediatrics: 9, adults: 25 }
-        ];
+        // const hospitalizationData = [
+        //   { year: 2021, pediatrics: 6, adults: 19 },
+        //   { year: 2022, pediatrics: 9, adults: 21 },
+        //   { year: 2023, pediatrics: 9, adults: 25 }
+        // ];
         const impactData = [
           { impact: "Daily activity impairment due to SMA", caregiver: 42, affectedAdult: 55 },
           { impact: "Overall work impairment due to SMA", caregiver: 37, affectedAdult: 27 },
@@ -189,6 +199,31 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           { name: 'Moderately Effective', percentage: 37 },
           { name: 'Effective/Very Effective', percentage: 44 },
         ];
+        const hospitalisationdata = [
+          {
+            year: '2021',
+            pediatricPercent: 6,
+            adultPercent: 19,
+            pediatricAvg: 2.4,
+            adultAvg: 2.2,
+          },
+          {
+            year: '2022',
+            pediatricPercent: 9,
+            adultPercent: 21,
+            pediatricAvg: 2,
+            adultAvg: 2.2,
+          },
+          {
+            year: '2023',
+            pediatricPercent: 9,
+            adultPercent: 25,
+            pediatricAvg: 1.6,
+            adultAvg: 1.6,
+          },
+        ];
+        
+        
         
         
         
@@ -200,9 +235,10 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
           insuranceData1:insuranceData1,
           SMA_Treatments:SMA_Treatments,
           mortality:mortality,
-          hospitalizationData:hospitalizationData,
+          hospitalisationdata:hospitalisationdata,
           impactData:impactData,
-          teledata:teledata
+          teledata:teledata,
+          breathingData:breathingData
          
         };
       }
@@ -215,7 +251,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     const chartConfig = getChartData();
     if (!chartConfig) return null;
 
-    const { type, title, lineData,smaDistributionData, SMN2,distanceAccessData, treatmentData1, insuranceData1,insuranceData,SMA_Treatments,Screeningdata,mortality,hospitalizationData,waitTimeData,impactData,teledata } = chartConfig;
+    const { type, title,breathingData, notscreendata,lineData,smaDistributionData, SMN2,distanceAccessData, treatmentData1, insuranceData1,insuranceData,SMA_Treatments,Screeningdata,mortality,hospitalisationdata,waitTimeData,impactData,teledata } = chartConfig;
 
     switch (type) {
       case 'line':
@@ -491,7 +527,33 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               
               
               </div>
-
+              <div className="grid grid-cols-2 gap-8">
+                <div className="p-4">
+                  <h4 className="text-sm font-medium text-gray-700 mb-4">
+                  Individuals Not Identified by Screening: Average Age at SMA Diagnosis
+                  </h4>
+                  <div className="h-[400px] -ml-20 mr-7">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={notscreendata} margin={{ top: 20, right: 30, left: 70, bottom: 20 }}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="year" label={{ value: 'Year Diagnosed', position: 'insideBottom', offset: -10 }} />
+                      <YAxis label={{ value: 'Age (Years)', angle: -90, position: 'insideLeft' }} />
+                      <Tooltip />
+                      <Legend />
+                      <Line
+                        type="monotone"
+                        dataKey="age"
+                        stroke="#8884d8"
+                        dot={{ r: 5 }}
+                        activeDot={{ r: 8 }}
+                        name="Average Age"
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                  </div>
+                  
+                </div>
+              </div> 
 
 
               <div className="grid grid-cols-1 gap-8">
@@ -604,7 +666,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
 
 
-              <div className="grid grid-cols-3 gap-8">
+              <div className="grid grid-cols-4 gap-4">
                 {/* Treatment Effectiveness Pie Chart */}
 
 
@@ -655,61 +717,23 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
                 <div className="p-6">
                   <h4 className="text-sm font-medium text-gray-700 mb-6">Hospitalization Rate</h4>
-                  <div className="aspect-[4/3] w-full">
-                    {/* <ResponsiveContainer width="90%" height="90%">
-                      <BarChart data={treatmentData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Bar dataKey="Newborn Screened" stackId="a" fill="#8884d8" />
-                        <Bar dataKey="Teens" stackId="a" fill="#82ca9d" />
-                        <Bar dataKey="Adults" stackId="a" fill="#ffc658" />
-                        <Bar dataKey="Newborn Screened (Other)" stackId="a" fill="#d0ed57" />
-                      </BarChart>
-                    </ResponsiveContainer> */}
+                  <div className="h-[200px] ">
+                    
 
-                      <ResponsiveContainer width="100%" height="100%">
-                        <LineChart 
-                          data={hospitalizationData} 
-                          margin={{ top: 30, right: 30, left: 20, bottom: 5 }}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="year" />
-                          <YAxis 
-                            domain={[0, 35]} 
-                            tickFormatter={(value) => `${value}%`}
-                          />
-                          <Tooltip formatter={(value) => `${value}%`} />
-                          <Legend />
-                          <Line
-                            type="monotone"
-                            dataKey="pediatrics"
-                            stroke="#ffc658"
-                            strokeWidth={2}
-                            dot={{ r: 4 }}
-                            label={{
-                              position: 'top',
-                              fill: '#ffc658',
-                              fontSize: 12,
-                              formatter: (value) => `${value}%`
-                            }}
-                          />
-                          <Line
-                            type="monotone"
-                            dataKey="adults"
-                            stroke="#ff7300"
-                            strokeWidth={2}
-                            dot={{ r: 4 }}
-                            label={{
-                              position: 'top',
-                              fill: '#ff7300',
-                              fontSize: 12,
-                              formatter: (value) => `${value}%`
-                            }}
-                          />
-                        </LineChart>
-                    </ResponsiveContainer>
+                  <ResponsiveContainer width="120%" height="150%">
+                          <BarChart data={hospitalisationdata}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="year" />
+                            <YAxis yAxisId="left" orientation="left" label={{ value: 'Percent Hospitalized (%)', angle: -90, position: 'insideLeft' }} />
+                            <YAxis yAxisId="right" orientation="right" label={{ value: 'Average Hospitalizations', angle: 90, position: 'insideRight' }} />
+                            <Tooltip />
+                            <Legend />
+                            <Bar yAxisId="right" dataKey="pediatricAvg" fill="#90cdf4" name="Avg. Hospitalizations (Pediatric)" />
+                            <Bar yAxisId="right" dataKey="adultAvg" fill="#b794f4" name="Avg. Hospitalizations (Adult)" />
+                            <Line yAxisId="left" type="monotone" dataKey="pediatricPercent" stroke="#63b3ed" name="Percent Hospitalized (Pediatric)" />
+                            <Line yAxisId="left" type="monotone" dataKey="adultPercent" stroke="#805ad5" name="Percent Hospitalized (Adult)" />
+                          </BarChart>
+                        </ResponsiveContainer>
                   </div>
                 </div>
   
@@ -721,7 +745,7 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
                 <div className="p-6">
                   <h4 className="text-sm font-medium text-gray-700 mb-6">Mortality Rate</h4>
-                  <div className="aspect-[4/3] w-full">
+                  <div className="h-[250px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart 
                         data={mortality}
@@ -742,6 +766,54 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                     </ResponsiveContainer>
                   </div>
                 </div>
+
+                <div className="p-6">
+                  <h4 className="text-sm font-medium text-gray-700 mb-6">Breathing Support Distribution</h4>
+                  <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadialBarChart
+                      cx="50%"
+                      cy="50%"
+                      innerRadius="30%"
+                      outerRadius="120%"
+                      data={breathingData}
+                      startAngle={180}
+                      endAngle={-180}
+                    >
+                      <RadialBar
+                        minAngle={15}
+                        background
+                        clockWise={true}
+                        dataKey="value"
+                        cornerRadius={10}
+                        label={{ fill: '#666', position: 'insideStart' }}
+                      />
+                      <Tooltip
+                       formatter={(value, name, props) => {
+                        // Ensure we're getting the correct name from the payload
+                        const itemName = props.payload.name || name;
+                        return `${itemName}: ${value}%`;
+                      }}
+                        contentStyle={{ backgroundColor: '#fff', borderRadius: '8px' }}
+                      />
+                      <Legend
+                        iconSize={10}
+                        layout="horizontal"
+                        verticalAlign="bottom"
+                        align="bottom"
+                        wrapperStyle={{ fontSize: '12px' }}
+                      />
+                    </RadialBarChart>
+                  </ResponsiveContainer>
+
+
+
+
+
+
+
+                    </div>
+                    </div>
 
 
 

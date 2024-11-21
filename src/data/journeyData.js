@@ -61,7 +61,8 @@ export const journeyData = [
       { value: "52.7%", label: "Genetic or Neurological Screening Recommendation Rate by PCP" },
 
       { value: "1 in 15,000", label: "Incidence rate of SMA " },
-      { value: "16.8 months", label: "Average Time to Symptom Reporting (Type-III)" }
+      { value: "16.8 months", label: "Average Time to Symptom Reporting (Type-III)" },
+      // { value: "55.3%", label: "Neurologist referal" }
 
     ]
 
