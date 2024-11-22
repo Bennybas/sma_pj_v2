@@ -54,15 +54,39 @@ export const journeyData = [
 
     metrics:[
 
-      { value: "84.81%", label: "Symptom Recognition Rate" },
+      { value: "84.81%", label: "Symptom Recognition Rate",
+        link:{
+          url:"https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0230677&type=printable#page=4",
+          name:"Reference"
+        } },
 
-      { value: "5.8 specialists", label: "Average Number of Specialists" },
+      { value: "5.8 specialists", label: "Average Number of Specialists",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=38",
+          name:"Reference"
+        }
+       },
 
-      { value: "52.7%", label: "Genetic or Neurological Screening Recommendation Rate by PCP" },
+      { value: "52.7%", label: "Genetic or Neurological Screening Recommendation Rate by PCP",
+        link:{
+          url:"https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0276756",
+          name:"Reference"
+        }
+       },
 
-      { value: "1 in 15,000", label: "Incidence rate of SMA " },
-      { value: "16.8 months", label: "Average Time to Symptom Reporting (Type-III)" },
-      // { value: "55.3%", label: "Neurologist referal" }
+      { value: "1 in 15,000", label: "Incidence rate of SMA ",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=7",
+          name:"Reference"
+        }
+       },
+      { value: "16.8 months", label: "Average Time to Symptom Reporting (Type-III)",
+        link:{
+          url:"https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0230677&type=printable#page=1",
+          name:"Reference"
+        } 
+
+      },
 
     ]
 
@@ -71,21 +95,20 @@ export const journeyData = [
     barriers: {
 
       physician: [
-
         {
-
           subpoints: [
-
-            "52% of patients or caregivers report delays in recognizing initial symptoms, impacting timely diagnosis.",
-
-            "15% of healthcare facilities are inadequately equipped to handle physically disabled patients.",
-
-            "35% of cases report geographic limitations, while 40% face transportation-related issues for timely evaluations."
-
-          ]
-
-        }
-
+            {
+              text: "52% of patients or caregivers report delays in recognizing initial symptoms, impacting timely diagnosis.",
+            },
+            {
+              text: "15% of healthcare facilities are inadequately equipped to handle physically disabled patients.",
+            },
+            {
+              text: "35% of cases report geographic limitations, while 40% face transportation-related issues for timely evaluations.",
+              
+            },
+          ],
+        },
       ],
 
      
@@ -96,10 +119,12 @@ export const journeyData = [
 
           subpoints: [
 
-            "25% of clinics lack Genetic testing facilities, and 50% of Providers express uncertainty about standardized SMA screening protocols.",
-
-            "40% of clinics report staff shortages, leading to delays in evaluations, while 45% of physicians rely on outdated assessment tools."
-
+            {
+              text:"25% of clinics lack Genetic testing facilities, and 50% of Providers express uncertainty about standardized SMA screening protocols.",
+            },
+            {
+              text:"40% of clinics report staff shortages, leading to delays in evaluations, while 45% of physicians rely on outdated assessment tools."
+            }
           ]
 
         }
@@ -114,10 +139,12 @@ export const journeyData = [
 
           subpoints: [
 
-            "Over 40% of patients or caregivers delay seeking medical advice due to misinterpretation of symptoms.",
-
-            "50% of patients report financial challenges, while 30% face logistical hurdles accessing primary care."
-
+            {
+              text:"Over 40% of patients or caregivers delay seeking medical advice due to misinterpretation of symptoms.",
+            },
+            {
+              text:"50% of patients report financial challenges, while 30% face logistical hurdles accessing primary care."
+            }
           ]
 
         }
@@ -224,13 +251,27 @@ export const journeyData = [
 
     metrics: [
 
-      { value: "95%", label: "Genetic Testing Rate" },
+      { value: "95%", label: "Genetic Testing Rate",
+        link:{
+          url:"https://www.ninds.nih.gov/health-information/disorders/spinal-muscular-atrophy",
+          name:"Reference"
+        }
+       },
 
-      { value: "50%", label: "Diagnosis Delay Rate (Type 4)" },
+      { value: "50%", label: "Diagnosis Delay Rate (Type 4)",
+        
+       },
 
-      { value: "30–50%", label: "Misdiagnosis Rate" },
+      { value: "30–50%", label: "Misdiagnosis Rate",
+        
+       },
 
-      { value: "8.1 years", label: "Average Diagnosis age" }
+      { value: "8.1 years", label: "Average Diagnosis age",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=7",
+          name:"Reference"
+        }
+       }
 
     ],
 
@@ -244,12 +285,15 @@ export const journeyData = [
 
           subpoints: [
 
-            "45% of healthcare centers lack genetic testing facilities.",
-
-            "Only 35% of rural areas have access to advanced SMN1/SMN2 copy diagnostics.",
-
-            "33% of patients experience delays exceeding four weeks for specialized appointments."
-
+            {
+              text:"45% of healthcare centers lack genetic testing facilities.",
+            },
+            {
+              text:"Only 35% of rural areas have access to advanced SMN1/SMN2 copy diagnostics.",
+            },
+            {
+              text:"33% of patients experience delays exceeding four weeks for specialized appointments."
+            }
           ]
 
         }
@@ -264,14 +308,18 @@ export const journeyData = [
 
           subpoints: [
 
-            "35% of referrals are delayed due to bureaucratic inefficiencies.",
-
-            "40% of diagnostic centers face challenges in accessing prior medical records.",
-
-            "Over reliance on overloaded tertiary centers delays diagnostics for 25% of cases.",
-
-            "50% of insurance plans exclude or limit coverage for genetic testing."
-
+            {
+              text:"35% of referrals are delayed due to bureaucratic inefficiencies.",
+            },
+            {
+              text:"40% of diagnostic centers face challenges in accessing prior medical records.",
+            },
+            {
+              text:"Over reliance on overloaded tertiary centers delays diagnostics for 25% of cases.",
+            },
+            {
+              text:"50% of insurance plans exclude or limit coverage for genetic testing."
+            }
           ]
 
         }
@@ -286,12 +334,15 @@ export const journeyData = [
 
           subpoints: [
 
-            "60% of families struggle to afford diagnostics.",
-
-            "45% of patients/caregivers lack understanding of genetic testing's importance.",
-
-            "50% of patients believe initial symptoms do not warrant advanced testing."
-
+            {
+              text: "60% of families struggle to afford diagnostics.",
+            },
+            {
+              text:"45% of patients/caregivers lack understanding of genetic testing's importance.",
+            },
+            {
+              text:"50% of patients believe initial symptoms do not warrant advanced testing."
+            }
           ]
 
         }
@@ -395,42 +446,93 @@ export const journeyData = [
     ]
     ,
     metrics: [
-      { value: "87%", label: "Treatment Utilization Rate" },
-      { value: "21.7 Days", label: "Average Treatment Initiation Time" },
-      { value: "55%", label: "Insurance Denial Rate" },
-      { value: "75%", label: "Successful Appeal Rate After Denial" },
-      { value: "79%", label: "Proportion of Individuals Receiving Telemedicine" },
-      {value:"0.75 per 100",label:"Mortality Rate"},
-      {value:"60%-70% ",label:"FDA-Approved Treatment Rate"}
+      { value: "87%", label: "Treatment Utilization Rate",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=28",
+          name:"Reference"
+        } },
+      { value: "21.7 Days", label: "Average Treatment Initiation Time",
+        link:{
+          url:"https://www.researchgate.net/publication/378682817_Assessment_of_Barriers_to_Referral_and_Appointment_Wait_Times_for_the_Evaluation_of_Spinal_Muscular_Atrophy_SMA_Findings_from_a_Web-Based_Physician_Survey",
+          name:"Reference"
+        } },
+      { value: "55%", label: "Insurance Denial Rate",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=29",
+          name:"Reference"
+        } },
+      { value: "75%", label: "Successful Appeal Rate After Denial",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=29",
+          name:"Reference"
+        } },
+      { value: "79%", label: "Proportion of Individuals Receiving Telemedicine",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=39",
+          name:"Reference"
+        } },
+      {value:"0.75 per 100",label:"Mortality Rate",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=40",
+          name:"Reference"
+        }},
+      {value:"60%-70% ",label:"FDA-Approved Treatment Rate",
+        link:{
+          url:"https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=26",
+          name:"Reference"
+        }}
 
     ],
     barriers: {
       physician: [
         {
           subpoints: [
-            "40% of rural populations lack access to SMA-specialized treatment centers.",
-            "35% of rehabilitation facilities report staffing shortages, impacting therapy delivery.",
-            "30% of families experience therapy approval delays exceeding three months.",
-            "50% of families struggle with the high costs of initiating SMA-approved therapies."
+            {
+              text:"40% of rural populations lack access to SMA-specialized treatment centers.",
+            },
+            {
+              text: "35% of rehabilitation facilities report staffing shortages, impacting therapy delivery.",
+            },
+            {
+              text:"30% of families experience therapy approval delays exceeding three months.",
+            },
+            {
+              text:"50% of families struggle with the high costs of initiating SMA-approved therapies."
+            }
           ]
+
         }
       ],
       system: [
         {
           subpoints: [
-            "50% of applications for gene therapies like Zolgensma are denied initially.",
-            "15% of new SMA therapies face delays in regional licensing processes.",
-            "35% of SMA-specialized centers face staffing shortages, delaying patient care."
+            {
+              text:"50% of applications for gene therapies like Zolgensma are denied initially.",
+            },
+            {
+              text:"15% of new SMA therapies face delays in regional licensing processes.",
+            },
+            {
+              text:"35% of SMA-specialized centers face staffing shortages, delaying patient care."
+            }
           ]
         }
       ],
       patient: [
         {
           subpoints: [
-            "25% of patients struggle to maintain consistent therapy schedules.",
-            "13% of families face mobility or transportation issues affecting regular treatment.",
-            "40% of patients or caregivers lack awareness about approved SMA therapies.",
-            "20% of families hesitate to adopt novel treatments due to trust concerns."
+            {
+              text:"25% of patients struggle to maintain consistent therapy schedules.",
+            },
+            {
+              text:"13% of families face mobility or transportation issues affecting regular treatment.",
+            },
+            {
+              text:"40% of patients or caregivers lack awareness about approved SMA therapies.",
+            },
+            {
+              text:"20% of families hesitate to adopt novel treatments due to trust concerns."
+            }
           ]
         }
       ]

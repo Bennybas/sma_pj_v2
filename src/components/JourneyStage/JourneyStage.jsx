@@ -389,8 +389,6 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
             </Card>
 
-
-
             </div>
            
             <div className="grid grid-cols-3 gap-8">
@@ -915,6 +913,33 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
     return '';
   };
 
+  const renderLink = (link) => {
+  if (!link) return null;
+
+  return (
+    <a
+      href={link.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        marginLeft: "5px",
+        padding: "2px 4px",
+        borderRadius: "15px",
+        fontSize: "10px",
+        fontWeight: "bold",
+        backgroundColor: "#9f9f9f",
+        color: "#ffffff",
+        textDecoration: "none",
+      }}
+      onMouseEnter={(e) => (e.target.style.backgroundColor = "#000000")}
+      onMouseLeave={(e) => (e.target.style.backgroundColor = "#9f9f9f")}
+    >
+      {link.name || "link"}
+    </a>
+  );
+};
+
+
   return (
     <div className="relative w-full">
       <Card className="bg-gradient-to-r from-purple-50 via-purple-100 to-purple-50 p-6 mb-6 shadow-lg rounded-lg border border-purple-200 transition-all duration-300 hover:shadow-xl">
@@ -990,6 +1015,9 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
         </div>
       )}
 
+
+      
+
       {/* Key Metrics, Barriers, and Findings Grid */}
       <div className="grid grid-cols-12 gap-6">
         {/* Key Metrics Section */}
@@ -1005,15 +1033,25 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             </h3>
             <div className="space-y-3">
               {metrics.map((metric, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className="bg-white p-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
                 >
                   <div className="text-xl font-bold text-blue-600">{metric.value}</div>
-                  <div className="text-xs leading-relaxed">{metric.label}</div>
+                  <div className="text-xs leading-relaxed">
+                    {metric.label ? (
+                      <>
+                        {metric.label}
+                        {renderLink(metric.link)}
+                      </>
+                    ) : (
+                      "No label available"
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
+
           </Card>
         </div>
 
@@ -1115,21 +1153,51 @@ const KeyBarriers = ({ barriers }) => {
                     key={idx} 
                     className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
                   >
-                    <div className="p-4">
-                      {barrier.subpoints && (
-                        <ul className="space-y-2">
-                          {barrier.subpoints.map((subpoint, subIdx) => (
-                            <li 
-                              key={subIdx}
-                              className="flex items-start gap-2 text-sm text-gray-700"
-                            >
-                              <span className="text-purple-500 mt-1">•</span>
-                              <span className="text-xs font-bold text-gray-700">{subpoint}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+                  <div className="p-4">
+                    {barrier.subpoints && (
+                      <ul className="space-y-2">
+                        {barrier.subpoints.map((subpoint, subIdx) => (
+                          <li key={subIdx} className="flex items-start gap-2 text-sm text-gray-700">
+                            <span className="text-purple-500 mt-1">•</span>
+                            <span className="text-xs font-bold text-gray-700">
+                             
+                              {typeof subpoint === 'object' ? (
+                                <>
+                                  {subpoint.text} 
+                                  {subpoint.link && ( 
+                                    <a
+                                      href={subpoint.link.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      style={{
+                                        marginLeft: "5px",
+                                        padding: "2px 4px",
+                                        borderRadius: "15px",
+                                        fontSize: "10px",
+                                        fontWeight: "bold",
+                                        backgroundColor: "#9f9f9f",
+                                        color: "#ffffff",
+                                        textDecoration: "none",
+                                      }}
+                                      onMouseEnter={(e) => (e.target.style.backgroundColor = "#000000")}
+                                      onMouseLeave={(e) => (e.target.style.backgroundColor = "#9f9f9f")}
+                                    >
+                                      {subpoint.link.name || "link"} {/* Display link name */}
+                                    </a>
+                                  )}
+                                </>
+                              ) : (
+                                
+                                subpoint
+                              )}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+
                   </li>
                 ))}
               </ul>
