@@ -64,7 +64,32 @@ const StateScreeningMap = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto p-4">
-      <h2 className="text-2xl font-bold text-center mb-4"> Screening Coverage by State</h2>
+      <div className="flex items-center justify-between mb-6">
+      <h2 className="text-2xl font-bold text-center mb-4 ml-60"> Screening Coverage by State</h2>
+          <a
+            href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=16" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-700 transition-colors"
+            title="More Info"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+              />
+            </svg>
+          </a>
+          </div>
+      
       <div className="flex justify-center items-center space-x-4 mb-4">
         <div className="flex items-center">
           <div className="w-4 h-4 bg-[#90EEB1] mr-2"></div>

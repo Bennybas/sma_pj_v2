@@ -306,8 +306,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
             <div className="grid grid-cols-3 gap-8">
             <Card className="p-6">
-            {/* <RadialChart /> */}
-            <h4 className="text-sm font-medium text-gray-700 mb-6">Wait Time to Neurologist Consultation</h4>
+            <div className="flex items-center justify-between mb-6">
+              <h4 className="text-sm font-medium text-gray-700">Wait Time to Neurologist Consultation</h4>
+              <a
+                href="https://www.researchgate.net/publication/378682817_Assessment_of_Barriers_to_Referral_and_Appointment_Wait_Times_for_the_Evaluation_of_Spinal_Muscular_Atrophy_SMA_Findings_from_a_Web-Based_Physician_Survey" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:text-blue-700 transition-colors"
+                title="More Info"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                  />
+                </svg>
+              </a>
+            </div>
+            
             <div className="aspect-[4/3] w-full">
             <ResponsiveContainer width="105%" height="105%">
                 <BarChart
@@ -330,7 +354,33 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
 
             <Card className="p-6">
+
+            <div className="flex items-center justify-between mb-6">
               <h4 className="text-sm font-medium text-gray-700 mb-6">SMN2 Copy Number Comparison</h4>
+                <a
+                  href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=15" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 transition-colors"
+                  title="More Info"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                    />
+                  </svg>
+                </a>
+              </div>
+             
               <div className="aspect-[4/3] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
@@ -351,7 +401,10 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
             </Card>
 
             <Card className="p-6">
-              <h4 className="text-sm font-medium text-gray-700 mb-6">Testing Facility Availabile Rate (%)</h4>
+            <div className="flex items-center justify-between mb-6">
+            <h4 className="text-sm font-medium text-gray-700 mb-6">Testing Facility Availabile Rate (%)</h4>
+              </div>
+             
               <div className="aspect-[4/3] w-full">
 
               <ResponsiveContainer width="100%" height="100%">
@@ -393,7 +446,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
            
             <div className="grid grid-cols-3 gap-8">
               <div className="p-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">Diagnosis Method Breakdown</h4>
+              <div className="flex items-center justify-between mb-6">
+              <h4 className="text-sm font-medium text-gray-700 mb-6">Diagnosis Method Breakdown</h4>
+                  <a
+                    href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=24" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-700 transition-colors"
+                    title="More Info"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+                
                 <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -424,7 +502,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
 
               <div className="p-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-4">Historical SMA Type Distribution</h4>
+              <div className="flex items-center justify-between mb-6">
+              <h4 className="text-sm font-medium text-gray-700 mb-4">Historical SMA Type Distribution</h4>
+                    <a
+                      href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=24" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-700 transition-colors"
+                      title="More Info"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                  
                   <div className="h-[400px]">
                   <ResponsiveContainer width="100%" height="100%">
                         <LineChart 
@@ -471,9 +574,34 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
               {/* Specialists Chart */}
             <div className="p-4">
-              <h4 className="text-sm font-medium text-gray-700 mb-4">
+            <div className="flex items-center justify-between mb-6">
+            <h4 className="text-sm font-medium text-gray-700 mb-4">
                 Distribution of Specialists by Category (%)
               </h4>
+                <a
+                  href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=38" // Replace with your reference link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 transition-colors"
+                  title="More Info"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                    />
+                  </svg>
+                </a>
+              </div>
+             
               <div className="h-[400px] -ml-20 mr-7">
               <ResponsiveContainer width="110%" height="80%">
                   <BarChart data={smaDistributionData} layout="vertical">
@@ -535,9 +663,34 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
               <div className="grid grid-cols-2 gap-8">
                 <div className="p-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-4">
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-4">
                   Individuals Not Identified by Screening: Average Age at SMA Diagnosis
                   </h4>
+                      <a
+                        href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=24" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-700 transition-colors"
+                        title="More Info"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                 
                   <div className="h-[400px] -ml-20 mr-7">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={notscreendata} margin={{ top: 20, right: 30, left: 70, bottom: 20 }}>
@@ -562,9 +715,34 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
 
                 <div className="p-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-4">
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-4">
                   RaceEthnicityCategories
                   </h4>
+                      <a
+                        href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=14" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-700 transition-colors"
+                        title="More Info"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                 
                   <div className="h-[400px] -ml-20 mr-7">
                   <ResponsiveContainer width="100%" height="100%">
                   <BarChart width={600} height={400} data={racedata}>
@@ -606,7 +784,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               <div className="grid grid-cols-3 gap-8">
 
               <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Average Time between Diagnosis and First SMA Treatment</h4>
+              <div className="flex items-center justify-between mb-6">
+              <h4 className="text-sm font-medium text-gray-700 mb-6">Average Time between Diagnosis and First SMA Treatment</h4>
+                <a
+                  href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=19"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 transition-colors"
+                  title="More Info"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                    />
+                  </svg>
+                </a>
+                </div>
+                  
                   <div className="aspect-[4/3] w-full">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart 
@@ -631,7 +834,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
                 
               <div className="p-4">
-                <h4 className="text-sm text-align-centre font-medium text-gray-700 mb-6">Insurance Coverage Status</h4>
+              <div className="flex items-center justify-between mb-6">
+              <h4 className="text-sm text-align-centre font-medium text-gray-700 mb-6">Insurance Coverage Status</h4>
+                <a
+                  href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=29" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 transition-colors"
+                  title="More Info"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                    />
+                  </svg>
+                </a>
+                </div>
+                
                 <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
@@ -662,7 +890,33 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
 
               <div className="p-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">Types of Insurance Among Patients with SMA</h4>
+
+              <div className="flex items-center justify-between mb-6">
+              <h4 className="text-sm font-medium text-gray-700 mb-6">Types of Insurance Among Patients with SMA</h4>
+                <a
+                  href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=18"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:text-blue-700 transition-colors"
+                  title="More Info"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                    />
+                  </svg>
+                </a>
+                </div>
+                
                 <div className="aspect-[4/3] w-full" >
                 <ResponsiveContainer width="100%" height="110%">
                     <BarChart layout="vertical" data={insuranceData1}>
@@ -700,7 +954,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
 
                 <div className="p-4">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">USE OF MULTIPLE TREATMENTS</h4>
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-6">USE OF MULTIPLE TREATMENTS</h4>
+                    <a
+                      href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=21"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-700 transition-colors"
+                      title="More Info"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        />
+                      </svg>
+                    </a>
+                    </div>
+                 
                   <div className="aspect-[4/3] w-full" style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -745,7 +1024,33 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
               </div>
 
                 <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Hospitalization Rate</h4>
+
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-6">Hospitalization Rate</h4>
+                      <a
+                        href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=35" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-700 transition-colors"
+                        title="More Info"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                          />
+                        </svg>
+                      </a>
+                      </div>
+                 
                   <div className="h-[200px] ">
                     
 
@@ -773,7 +1078,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
 
                 <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Mortality Rate</h4>
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-6">Mortality Rate</h4>
+                    <a
+                      href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=40" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-700 transition-colors"
+                      title="More Info"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        />
+                      </svg>
+                    </a>
+                    </div>
+                  
                   <div className="h-[250px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <LineChart 
@@ -797,7 +1127,32 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                 </div>
 
                 <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">Breathing Support Distribution</h4>
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-6">Breathing Support Distribution</h4>
+                    <a
+                      href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=36" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-700 transition-colors"
+                      title="More Info"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        />
+                      </svg>
+                    </a>
+                    </div>
+                  
                   <div className="h-[300px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <RadialBarChart
@@ -850,7 +1205,33 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
 
               <div className="grid grid-cols-2 items-center gap-8">
                 <div className="p-6">
-                  <h4 className="text-sm font-medium text-gray-700 mb-6">SMA impact on their lives</h4>
+
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-6 ml-20">SMA impact on their lives</h4>
+                    <a
+                      href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=13" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-700 transition-colors"
+                      title="More Info"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        />
+                      </svg>
+                    </a>
+                    </div>
+                 
                   <div className="aspect-[4/3] w-full">
                     <ResponsiveContainer  width="120%" height="110%">
                     <BarChart
@@ -872,7 +1253,34 @@ const JourneyStage = ({ stage, metrics, barriers, findings }) => {
                 </div>
 
                 <div className="p-6">
-                <h4 className="text-sm font-medium text-gray-700 mb-6">Effectiveness of TeleMedicine</h4>
+                  
+                <div className="flex items-center justify-between mb-6">
+                <h4 className="text-sm font-medium text-gray-700 mb-6 ml-20">Effectiveness of TeleMedicine</h4>
+                    <a
+                      href="https://www.curesma.org/wp-content/uploads/2024/06/9042024_State-of-SMA_vWeb.pdf#page=39"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:text-blue-700 transition-colors"
+                      title="More Info"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20 10 10 0 000-20z"
+                        />
+                      </svg>
+                    </a>
+                    </div>
+                  
+               
                 <div className="aspect-[4/3] w-full">
                 <ResponsiveContainer width="90%" height={400}>
                   <BarChart data={teledata}>
