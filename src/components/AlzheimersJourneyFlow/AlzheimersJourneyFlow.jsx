@@ -22,7 +22,7 @@ const AlzheimersJourneyFlow = () => {
         >
           <ArrowLeft className="text-gray-700 w-6 h-6" />
         </button>
-        <h1 className="text-xl font-bold ml-4">ZOLGENSMA Patient Journey</h1>
+        <h1 className="text-xl font-bold ml-4">SMA Patient Journey</h1>
       </div>
 
       <div className="space-y-12">
